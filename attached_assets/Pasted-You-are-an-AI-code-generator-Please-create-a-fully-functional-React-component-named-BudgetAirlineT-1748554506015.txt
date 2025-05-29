@@ -1,0 +1,64 @@
+You are an AI code generator. Please create a fully-functional React component named `BudgetAirlineTracker.jsx` that replaces placeholder parameters with real user inputs and pulls live flight data from the Amadeus Self-Service Flight Offers Search API. Use the official Amadeus JS SDK and Tailwind CSS for styling. The component must:
+
+1. **Setup & Imports**  
+   - Install and import Amadeus SDK:  
+     ```js
+     import Amadeus from '@amadeus';  
+     const amadeus = new Amadeus({  
+       clientId: process.env.REACT_APP_AMADEUS_CLIENT_ID,  
+       clientSecret: process.env.REACT_APP_AMADEUS_CLIENT_SECRET  
+     });
+     ```  
+   - Import React, hooks (`useState`, `useEffect`), `axios` (if needed), and Framer Motion (`motion`).
+
+2. **Form Inputs & Validation**  
+   - Render controlled inputs (with Tailwind classes) for:  
+     • Origin IATA code (3 letters, required)  
+     • Destination IATA code (3 letters, required)  
+     • Departure date (YYYY-MM-DD, required)  
+     • Return date (YYYY-MM-DD, optional)  
+     • Maximum budget (USD, number > 0, required)  
+   - Validate formats on submit; show inline error messages.
+
+3. **API Call & Filtering**  
+   - On form submit, call Amadeus’s Flight Offers Search endpoint:  
+     ```js
+     const response = await amadeus.shopping.flightOffersSearch.get({
+       originLocationCode: origin,
+       destinationLocationCode: destination,
+       departureDate,
+       returnDate,           // omit if not provided
+       currencyCode: 'USD',
+       maxPrice: budget,
+       adults: '1'
+     });
+     ```  
+   - Filter `response.data` to only include offers where `offer.price.total <= budget`.  
+   - Sort ascending by price and take the top 5.
+
+4. **State Management & UX**  
+   - Manage `formData`, `loading`, `error`, and `offers` via `useState`.  
+   - Use `useEffect` only for retrieving an OAuth token if you choose manual token flow (otherwise SDK handles it).  
+   - Display a Tailwind-styled `<Spinner />` or `<motion.div>` loader while fetching.  
+   - Show a friendly error if fetch fails or no results under budget.
+
+5. **Results Display**  
+   - Render the top 5 offers in responsive Tailwind cards inside a `<motion.div>` with a fade-in animation. Each card should include:  
+     • Airline name or logo if provided (`offer.validatingAirlineCodes[0]`)  
+     • Total price (`offer.price.total`) highlighted  
+     • Outbound & return times (`offer.itineraries[0].segments` details)  
+     • Number of stops (`segments.length - 1`)  
+     • “Book Now” button linking to `offer.travelerPricings[0].fareDetailsBySegment[0].flightOfferId` booking URL if available, otherwise a placeholder deep link to Google Flights  
+   - Ensure cards stack on mobile and form a grid on desktop.
+
+6. **Price Tracking Toggle**  
+   - Add a “Track Price” switch (checkbox) on each card. When toggled on, save `{ origin, destination, departureDate, returnDate, budget }` to `localStorage` (or React Context) under a “trackedRoutes” key.  
+   - Show a toast or inline message “Tracking enabled” on toggle.
+
+7. **Accessibility & Polish**  
+   - Add `role="form"`, `aria-label`, and `aria-invalid` on inputs.  
+   - Use semantic HTML (`<form>`, `<fieldset>`, `<legend>`, `<button>`).  
+   - Ensure all text meets WCAG AA contrast.  
+   - Animate card hover with a slight scale-up (`whileHover={{ scale: 1.02 }}`).
+
+Produce the complete `BudgetAirlineTracker.jsx` file, including all necessary imports, environment variable usage, Tailwind classes, and Framer Motion animations.  
