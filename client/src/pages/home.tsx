@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Sidebar from "@/components/sidebar";
 import BudgetAirlineTracker from "@/components/BudgetAirlineTracker";
+import PriceDropNotifier from "@/components/PriceDropNotifier";
 import { Search, TrendingUp, Bell } from "lucide-react";
 
 export default function Home() {
@@ -20,6 +21,8 @@ export default function Home() {
         <div className="flex-1 p-6 lg:p-8">
           {activeItem === "budget-tracker" ? (
             <BudgetAirlineTracker />
+          ) : activeItem === "price-drop" ? (
+            <PriceDropNotifier />
           ) : (
             <div className="max-w-4xl mx-auto">
               {/* Hero Section */}
