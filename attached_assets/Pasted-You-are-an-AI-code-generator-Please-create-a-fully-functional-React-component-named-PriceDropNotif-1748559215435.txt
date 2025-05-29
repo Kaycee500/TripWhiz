@@ -1,0 +1,55 @@
+You are an AI code generator. Please create a fully-functional React component named `PriceDropNotifier.jsx` that replaces placeholders with real user inputs and pulls live flight data from the Amadeus Self-Service Flight Offers Search API. Use the official Amadeus JS SDK, Tailwind CSS, Framer Motion, and the browser Notifications API. The component must:
+
+1. **Setup & Imports**  
+   - Import React, hooks (`useState`, `useEffect`), Amadeus SDK, Framer Motion (`motion`), and a toast library of your choice (e.g. `react-hot-toast`).  
+   - Initialize Amadeus client using:  
+     ```js
+     import Amadeus from '@amadeus';
+     const amadeus = new Amadeus({
+       clientId: process.env.REACT_APP_AMADEUS_CLIENT_ID,
+       clientSecret: process.env.REACT_APP_AMADEUS_CLIENT_SECRET
+     });
+     ```
+
+2. **Tracked Routes Source**  
+   - On mount, load an array of tracked routes from `localStorage.getItem('trackedRoutes')`. Each route is an object `{ origin, destination, departureDate, returnDate, budget }`.  
+   - If none exist, show a message: “No routes being tracked. Go to Budget Airline Tracker to add some.”
+
+3. **Polling & Price Comparison**  
+   - Implement a `checkPrices()` async function that:  
+     • Loops through each tracked route  
+     • Calls `amadeus.shopping.flightOffersSearch.get()` with its parameters  
+     • Extracts the lowest `offer.price.total`  
+     • Compares it to the **last known price** stored in component state (or fallback to `budget` if first run)  
+     • If current price < last known price, trigger a notification (see below) and update the saved “lastPrice”  
+   - Use `useEffect` to run `checkPrices()` on mount and then every 6 hours via `setInterval`.
+
+4. **Browser Notifications**  
+   - On first load, request Notification permission: `Notification.requestPermission()`.  
+   - When a price drop is detected, send a browser notification:  
+     ```js
+     new Notification('Price Drop Alert!', {
+       body: `Price for ${origin}-${destination} dropped from $${oldPrice} to $${newPrice}`,
+     });
+     ```  
+   - Also show an in-app toast: `toast.success('Price dropped! Check your dashboard.')`.
+
+5. **UI & Results Display**  
+   - Render a header “Price Drop Notifier” with a brief description.  
+   - For each tracked route, display a Tailwind card showing:  
+     • Route: “LAX → JFK”  
+     • Departure & return dates  
+     • Budget threshold  
+     • Last checked price and current price (highlight drop in green if lower)  
+   - Wrap cards in a `<motion.div>` with a subtle fade-in animation.
+
+6. **Manage State & Persistence**  
+   - Store an object `[ { route, lastPrice } ]` in component state.  
+   - After each check, update the state and persist to `localStorage.setItem('trackedRoutesWithPrices', JSON.stringify(state))`.
+
+7. **Accessibility & Polishing**  
+   - Add `aria-live="polite"` on the results container for screen-reader updates.  
+   - Ensure color contrast meets WCAG AA.  
+   - Animate card hover with `whileHover={{ scale: 1.02 }}`.
+
+Produce the complete `PriceDropNotifier.jsx` file with all necessary imports, environment-variable usage, Tailwind classes, Framer Motion wrappers, and inline comments explaining each major block.  
