@@ -1,0 +1,41 @@
+You are an AI code generator. Please create a fully-functional React component named `BudgetAirlineTracker` that replaces placeholder parameters with real user inputs and pulls live flight data from the Skyscanner Flights API. Adhere to these requirements:
+
+1. **Inputs & Props**  
+   - Render form fields for:  
+     • Origin airport IATA code (required)  
+     • Destination airport IATA code (required)  
+     • Travel date range (outboundDate YYYY-MM-DD, inboundDate YYYY-MM-DD, optional)  
+     • Maximum budget in USD (required)  
+   - Validate that IATA codes are 3 letters, dates are in valid format, and budget > 0.
+
+2. **API Integration**  
+   - Use `axios` (imported) to call Skyscanner’s Browse Quotes endpoint:  
+     ```
+     GET https://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/US/USD/en-US/{origin}/{destination}/{outboundDate}/{inboundDate}?apiKey=${process.env.REACT_APP_SKYSCANNER_API_KEY}
+     ```  
+   - Pass parameters dynamically from user inputs.  
+   - On success, filter the returned quotes for the lowest-priced quotes per carrier under the specified budget.
+
+3. **State & UX**  
+   - Manage `formData`, `loading`, `error`, and `quotes` with `useState`.  
+   - Show a Tailwind-styled spinner while loading.  
+   - Display an error message if the API call fails or if no quotes ≤ budget are found.
+
+4. **Results Display**  
+   - Render the top 5 cheapest quotes in responsive Tailwind cards, each showing:  
+     • Airline name/logo (if available)  
+     • Price (USD) highlighted  
+     • Outbound date, direct vs. stops count  
+     • A “Track Price” toggle button to set up alerts on this route  
+   - Cards should stack on mobile and display in a 2-column grid on desktop.
+
+5. **Alerts Integration**  
+   - When “Track Price” is toggled, store the route and budget in local storage (or context) for weekly polling/notifications.  
+   - Provide feedback (“Tracking enabled!”) when toggled.
+
+6. **Accessibility & Polishing**  
+   - Add `aria-labels` on form elements and buttons.  
+   - Ensure color contrast meets WCAG AA.  
+   - Use Framer Motion to animate the results cards’ entrance (`<motion.div>`).
+
+Include all necessary imports, environment variable usage, and Tailwind classes to deliver a ready-to-use `BudgetAirlineTracker.jsx` file.
