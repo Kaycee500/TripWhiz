@@ -1,6 +1,15 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import * as Sentry from "@sentry/node";
+
+// Initialize Sentry for server-side error monitoring
+if (process.env.SENTRY_DSN) {
+  Sentry.init({
+    dsn: process.env.SENTRY_DSN,
+    tracesSampleRate: 1.0,
+  });
+}
 
 const app = express();
 app.use(express.json());
@@ -39,9 +48,16 @@ app.use((req, res, next) => {
 (async () => {
   const server = await registerRoutes(app);
 
+  // Sentry error reporting in error handler
+
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
+
+    // Report error to Sentry if available
+    if (process.env.SENTRY_DSN) {
+      Sentry.captureException(err);
+    }
 
     res.status(status).json({ message });
     throw err;
