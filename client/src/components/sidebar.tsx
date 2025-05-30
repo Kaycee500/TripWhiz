@@ -170,7 +170,6 @@ export default function Sidebar({ activeItem = "hidden-deals", onItemClick }: Si
                     : `text-gray-500 ${item.hoverColor}`
                 }`} 
               />
-              <span className="text-base">{item.label}</span>
             </button>
           );
         })}
