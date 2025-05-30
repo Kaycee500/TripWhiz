@@ -1,0 +1,63 @@
+You are an AI code generator. Please create a fully-functional React component named `HiddenDealFinder.jsx` that uses the Amadeus Self-Service Low-Fare Search API to find “hidden-city” itineraries. Use the Amadeus JS SDK, Tailwind CSS for styling, and Framer Motion for animations. The component must:
+
+1. **Setup & Imports**  
+   - Import React, hooks (`useState`, `useEffect`), Amadeus SDK, and Framer Motion (`motion`):  
+     ```js
+     import React, { useState } from 'react';
+     import Amadeus from '@amadeus';
+     import { motion } from 'framer-motion';
+     ```  
+   - Initialize Amadeus client with environment variables:  
+     ```js
+     const amadeus = new Amadeus({
+       clientId: process.env.REACT_APP_AMADEUS_CLIENT_ID,
+       clientSecret: process.env.REACT_APP_AMADEUS_CLIENT_SECRET
+     });
+     ```
+
+2. **Form Inputs & Validation**  
+   - Render controlled inputs (Tailwind classes) for:  
+     • Origin IATA code (3 letters, required)  
+     • Hidden-city target IATA code (3 letters, required)  
+     • Search date (YYYY-MM-DD, required)  
+     • Maximum budget in USD (required, number > 0)  
+   - Validate each field on submit and display inline error messages.
+
+3. **API Call**  
+   - On form submit, call Amadeus’s Low-Fare Search endpoint:  
+     ```js
+     const response = await amadeus.shopping.flightOffers.get({
+       originLocationCode: origin,
+       destinationLocationCode: hiddenCity,
+       departureDate: date,
+       currencyCode: 'USD',
+       maxPrice: budget,
+       adults: '1'
+     });
+     ```  
+   - Handle network errors and invalid API responses.
+
+4. **Hidden-City Filtering**  
+   - From `response.data`, find itineraries with at least two segments.  
+   - Filter for those where the **first layover’s arrival airport** equals the user’s `hiddenCity` (i.e., the user’s desired “hidden” destination), then continues onward to a further city.  
+   - Ensure `offer.price.total <= budget`.
+
+5. **State Management & UX**  
+   - Use `useState` to manage `formData`, `loading`, `error`, and `hiddenDeals`.  
+   - Show a Tailwind-styled spinner or `<motion.div>` loader while fetching.  
+   - Display a friendly error if API fails or no hidden-city deals are found.
+
+6. **Results Display**  
+   - Render the top 5 filtered itineraries in responsive Tailwind cards within a `<motion.div>` fade-in:  
+     • Airline logo or name (`offer.validatingAirlineCodes[0]`)  
+     • Total price highlighted  
+     • Segment details: first leg (Origin → Hidden City) and second leg (Hidden City → Final Stop) with times and duration  
+     • Badge “Hidden-City Deal” on each card  
+     • “Book Now” button linking to the first segment’s deep-link URL (or a Google Flights link)
+
+7. **Accessibility & Polish**  
+   - Use semantic HTML (`<form>`, `<fieldset>`, `<legend>`, `<button>`), `aria-label` on inputs, and `alt` text on images.  
+   - Ensure color contrast meets WCAG AA.  
+   - Animate card hover with `whileHover={{ scale: 1.02 }}` and card entrance with Framer Motion.
+
+Produce the complete `HiddenDealFinder.jsx` file—including all imports, environment-variable usage, Tailwind classes, Framer Motion wrappers, and inline comments explaining each major block—so it’s ready to drop into the TripWhiz codebase.  

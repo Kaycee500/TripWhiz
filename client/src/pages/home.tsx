@@ -5,6 +5,7 @@ import PriceDropNotifier from "@/components/PriceDropNotifier";
 import CarryOnOnlyFilter from "@/components/CarryOnOnlyFilter";
 import TravelVPNTrick from "@/components/TravelVPNTrick";
 import MultiCityHackSimulator from "@/components/MultiCityHackSimulator";
+import HiddenDealFinder from "@/components/HiddenDealFinder";
 import SupportChatbot from "@/components/SupportChatbot";
 import { Search, TrendingUp, Bell } from "lucide-react";
 
@@ -33,6 +34,8 @@ export default function Home() {
             <TravelVPNTrick />
           ) : activeItem === "multi-city" ? (
             <MultiCityHackSimulator />
+          ) : activeItem === "hidden-deals" ? (
+            <HiddenDealFinder />
           ) : (
             <div className="max-w-4xl mx-auto">
               {/* Hero Section */}
