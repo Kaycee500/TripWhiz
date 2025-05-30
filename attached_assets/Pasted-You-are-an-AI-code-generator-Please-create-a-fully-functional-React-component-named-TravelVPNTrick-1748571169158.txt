@@ -1,0 +1,52 @@
+You are an AI code generator. Please create a fully-functional React component named `TravelVPNTrick.jsx` that replaces placeholder parameters with real user inputs and integrates a VPN-based market override for flight searches. Use React, Tailwind CSS, Framer Motion, and a browser-friendly VPN SDK (e.g. `@protonvpn/web-sdk`). The component must:
+
+1. **Setup & Imports**  
+   - Install and import:  
+     ```js
+     import React, { useState, useEffect, useContext } from 'react';
+     import { motion } from 'framer-motion';
+     import { Spinner } from './Spinner';
+     import { connect, disconnect, getStatus, listServers } from '@protonvpn/web-sdk';
+     ```  
+   - Import any context hook you use for flight searches (e.g. `MarketContext`).
+
+2. **VPN Servers & Market List**  
+   - On mount, fetch available ProtonVPN server locations via `const servers = await listServers();`  
+   - Map `servers` to a list of `{ code: server.countryCode, name: server.countryName }`.  
+   - Sort alphabetically.
+
+3. **UI & Form Inputs**  
+   - Render a dropdown (`<select>`) with Tailwind styling for “Search Market (Country)”:  
+     • Default option “Use My Location”  
+     • One option per country (`countryName (countryCode)`).  
+   - Below the dropdown, show VPN status: “Disconnected,” “Connecting…,” or “Connected to [COUNTRY]” with a colored badge.
+   - Add a Tailwind “Connect” / “Disconnect” button that toggles VPN connection.
+
+4. **State Management & UX**  
+   - Manage `selectedServer`, `status` (`'disconnected' | 'connecting' | 'connected'`), and `error` with `useState`.  
+   - When the user picks a country and clicks “Connect,” call:  
+     ```js
+     setStatus('connecting');
+     await connect({ server: selectedServer.code });
+     setStatus('connected');
+     ```  
+   - On “Disconnect,” call `await disconnect()` and set status back to `'disconnected'`.  
+   - Show `<Spinner />` next to the button when `status === 'connecting'`.  
+   - Display any `error` messages in red text.
+
+5. **Market Context Integration**  
+   - Use `useContext(MarketContext)` to get `setMarket`.  
+   - Whenever `status === 'connected'`, call `setMarket(selectedServer.code)` to override flight API `market` parameter.  
+   - When disconnected or “Use My Location” is selected, call `setMarket(null)`.
+
+6. **Accessibility & Animations**  
+   - Ensure the dropdown and button have `aria-label`.  
+   - Animate the status badge fade and dropdown/section slide-in with `<motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2 }} />`.  
+   - Ensure color contrast meets WCAG AA.
+
+7. **Styling**  
+   - Use Tailwind utilities: `p-4`, `rounded-lg`, `shadow-md`, `bg-white`, `space-y-3` for the container.  
+   - Buttons: `px-4 py-2 rounded-md font-medium focus:outline-none hover:bg-gray-100`.  
+   - Badge: `inline-block px-2 py-1 text-sm rounded-full`.
+
+Produce the complete `TravelVPNTrick.jsx` file—including all imports, hooks, context usage, Tailwind classes, Framer Motion wrappers, and inline comments explaining each major block—so it’s ready to drop into your TripWhiz codebase.  

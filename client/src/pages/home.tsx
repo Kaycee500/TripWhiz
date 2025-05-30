@@ -3,6 +3,7 @@ import Sidebar from "@/components/sidebar";
 import BudgetAirlineTracker from "@/components/BudgetAirlineTracker";
 import PriceDropNotifier from "@/components/PriceDropNotifier";
 import CarryOnOnlyFilter from "@/components/CarryOnOnlyFilter";
+import TravelVPNTrick from "@/components/TravelVPNTrick";
 import { Search, TrendingUp, Bell } from "lucide-react";
 
 export default function Home() {
@@ -26,6 +27,8 @@ export default function Home() {
             <PriceDropNotifier />
           ) : activeItem === "carry-on" ? (
             <CarryOnOnlyFilter />
+          ) : activeItem === "vpn-trick" ? (
+            <TravelVPNTrick />
           ) : (
             <div className="max-w-4xl mx-auto">
               {/* Hero Section */}
