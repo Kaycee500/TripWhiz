@@ -1,0 +1,57 @@
+````plaintext
+You are an AI code generator. Please create a fully-functional React component named `SupportChatbot.jsx` that implements an autonomous “Support” chatbot floating widget. It must self-train on the site’s content and user interactions, know the layout of TripWhiz, and upgrade its knowledge daily. Use React, Tailwind CSS, Framer Motion, OpenAI’s chat/completions & embeddings APIs, and a simple in-browser vector store. The component must:
+
+1. **Setup & Imports**  
+   - Import React, hooks (`useState`, `useEffect`, `useRef`), Tailwind CSS utilities, Framer Motion (`motion`), and OpenAI SDK:  
+     ```js
+     import React, { useState, useEffect, useRef } from 'react';
+     import { motion } from 'framer-motion';
+     import OpenAI from 'openai';
+     const openai = new OpenAI({ apiKey: process.env.REACT_APP_OPENAI_API_KEY });
+     ```  
+   - Import a simple vector store implementation (e.g. `import { VectorStore } from './VectorStore';`).
+
+2. **UI & Layout**  
+   - Render a floating “Support” button fixed to bottom-right; when clicked, toggle a chat window.  
+   - Chat window includes:  
+     • Header “Support” with close icon  
+     • Scrollable message list  
+     • Input box and Send button  
+   - Style with Tailwind: rounded corners (`rounded-xl`), shadows, `bg-white`, `w-full md:w-80`, `h-96`.
+
+3. **Knowledge Base Initialization**  
+   - On first mount, fetch site map or page metadata from `/api/sitemap` (list of `{ url, title, content }`).  
+   - Use OpenAI embeddings to index each page:  
+     ```js
+     const embedding = await openai.embeddings.create({ model: 'text-embedding-3-small', input: page.content });
+     vectorStore.add({ id: page.url, embedding: embedding.data[0].embedding, metadata: page });
+     ```
+   - Persist the vector store to `localStorage` so it survives reloads.
+
+4. **Daily Knowledge Refresh**  
+   - Use `useEffect` with `setInterval` (24h) to refetch `/api/sitemap` and re-embed new/updated pages in `vectorStore`.
+
+5. **Self-Training from Conversations**  
+   - After each user message, append it to `vectorStore` as a new doc.  
+   - Optionally, call a backend endpoint `/api/fine-tune` with recent conversation log to trigger a model update (pseudocode comment is fine).
+
+6. **Query Handling (RAG)**  
+   - On user submit:  
+     - Embed the query: `await openai.embeddings.create({ model: 'text-embedding-3-small', input: userText })`  
+     - Retrieve top 3 similar pages via `vectorStore.similaritySearch(embedding)`  
+     - Build a prompt combining retrieved `metadata.content` snippets + system instructions (“You are TripWhiz Support…”)  
+     - Call `openai.chat.completions.create({ model: 'gpt-4o-mini', messages: [ { role:'system', content: … }, { role:'user', content: userText } ] })`  
+   - Display the AI response in the chat window.
+
+7. **State Management & UX**  
+   - Use `useState` for `isOpen`, `messages` array, `loading`, `error`.  
+   - Use `useRef` for auto-scrolling the message list on new messages.  
+   - Show a Tailwind spinner or Framer Motion loading indicator when awaiting the AI response.
+
+8. **Accessibility & Polishing**  
+   - Ensure `role="dialog"` on chat window, `aria-label` on input, and keyboard focus management.  
+   - Animate opening/closing of the widget with Framer Motion (`initial`, `animate`, `exit`).  
+   - Ensure color contrast (WCAG AA).
+
+Produce the complete `SupportChatbot.jsx` file with all imports, context code, VectorStore usage, OpenAI calls, Tailwind classes, Framer Motion animations, and inline comments explaining each major block.  
+````

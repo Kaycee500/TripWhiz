@@ -4,6 +4,7 @@ import BudgetAirlineTracker from "@/components/BudgetAirlineTracker";
 import PriceDropNotifier from "@/components/PriceDropNotifier";
 import CarryOnOnlyFilter from "@/components/CarryOnOnlyFilter";
 import TravelVPNTrick from "@/components/TravelVPNTrick";
+import SupportChatbot from "@/components/SupportChatbot";
 import { Search, TrendingUp, Bell } from "lucide-react";
 
 export default function Home() {
@@ -99,6 +100,9 @@ export default function Home() {
           )}
         </div>
       </main>
+      
+      {/* Support Chatbot - Available on all pages */}
+      <SupportChatbot />
     </div>
   );
 }
