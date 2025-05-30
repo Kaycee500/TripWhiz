@@ -6,6 +6,7 @@ import CarryOnOnlyFilter from "@/components/CarryOnOnlyFilter";
 import TravelVPNTrick from "@/components/TravelVPNTrick";
 import MultiCityHackSimulator from "@/components/MultiCityHackSimulator";
 import HiddenDealFinder from "@/components/HiddenDealFinder";
+import ErrorFareScanner from "@/components/ErrorFareScanner";
 import SupportChatbot from "@/components/SupportChatbot";
 import { Search, TrendingUp, Bell } from "lucide-react";
 
@@ -36,6 +37,8 @@ export default function Home() {
             <MultiCityHackSimulator />
           ) : activeItem === "hidden-deals" ? (
             <HiddenDealFinder />
+          ) : activeItem === "error-fare" ? (
+            <ErrorFareScanner />
           ) : (
             <div className="max-w-4xl mx-auto">
               {/* Hero Section */}

@@ -1,0 +1,69 @@
+You are an AI code generator. Please create a fully-functional React component named `ErrorFareScanner.jsx` that uses the Amadeus Self-Service Flight Price Insights and Flight Offers Search APIs to detect “error fares” (price anomalies). Use the official Amadeus JS SDK, Tailwind CSS, and Framer Motion. The component must:
+
+1. **Setup & Imports**  
+   - Import React, hooks (`useState`, `useEffect`), Amadeus SDK, and Framer Motion (`motion`):  
+     ```js
+     import React, { useState } from 'react';
+     import Amadeus from '@amadeus';
+     import { motion } from 'framer-motion';
+     ```  
+   - Initialize Amadeus client with environment variables:  
+     ```js
+     const amadeus = new Amadeus({
+       clientId: process.env.REACT_APP_AMADEUS_CLIENT_ID,
+       clientSecret: process.env.REACT_APP_AMADEUS_CLIENT_SECRET
+     });
+     ```
+
+2. **Form Inputs & Validation**  
+   - Render controlled inputs (Tailwind classes) for:  
+     • Origin IATA code (3 letters, required)  
+     • Destination IATA code (3 letters, required)  
+     • Travel date (YYYY-MM-DD, required)  
+     • Anomaly threshold (decimal, e.g. 0.5 for 50% of average price, required)  
+   - Validate each field on submit and display inline error messages.
+
+3. **Price Insights API Call**  
+   - On submit, call Amadeus’s Price Insights endpoint to get historical pricing data:  
+     ```js
+     const insights = await amadeus.travel.analytics.pricing.traveledates.get({
+       originLocationCode: origin,
+       destinationLocationCode: destination,
+       departureDate: date
+     });
+     ```  
+   - Compute the **average price** from `insights.data` (array of `{ date, price }`).
+
+4. **Current Offers API Call & Anomaly Detection**  
+   - Next, call the Flight Offers Search endpoint for that specific date:  
+     ```js
+     const offersResponse = await amadeus.shopping.flightOffersSearch.get({
+       originLocationCode: origin,
+       destinationLocationCode: destination,
+       departureDate: date,
+       currencyCode: 'USD',
+       adults: '1'
+     });
+     ```  
+   - From `offersResponse.data`, find the lowest-priced offer (`offer.price.total`).  
+   - If `lowestPrice <= averagePrice * threshold`, consider it an **error fare**.
+
+5. **State Management & UX**  
+   - Use `useState` to manage `formData`, `loading`, `error`, and `errorFares` (array).  
+   - Show a Tailwind-styled spinner or `<motion.div>` loader while fetching.  
+   - Display a friendly error if APIs fail or no anomalies are found.
+
+6. **Results Display**  
+   - Render the flagged error fare in a responsive Tailwind card inside a `<motion.div>` fade-in:  
+     • Airline name/logo (`offer.validatingAirlineCodes[0]`)  
+     • Error fare price highlighted (e.g. in red) and the average price crossed out  
+     • Flight details: departure/arrival times, stops  
+     • Badge “Error Fare Deal” on the card  
+     • “Book Now” button linking to the offer’s deep-link URL or a Google Flights search link  
+
+7. **Accessibility & Polishing**  
+   - Use semantic HTML (`<form>`, `<button>`, `<fieldset>`) and `aria-label` on inputs.  
+   - Ensure color contrast meets WCAG AA (especially for the “Error Fare” badge).  
+   - Animate card hover with `whileHover={{ scale: 1.02 }}`.
+
+Produce the complete `ErrorFareScanner.jsx` file with all necessary imports, Amadeus API calls, average-price calculation logic, Tailwind classes, Framer Motion wrappers, and inline comments explaining each major block.  
