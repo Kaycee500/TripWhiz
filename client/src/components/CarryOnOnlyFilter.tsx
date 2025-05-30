@@ -168,6 +168,7 @@ export default function CarryOnOnlyFilter() {
         departureDate: formData.departureDate,
         ...(formData.returnDate && { returnDate: formData.returnDate }),
         currencyCode: 'USD',
+        maxPrice: '2000', // Set a reasonable upper limit for carry-on searches
         adults: '1',
         includedCheckedBagsOnly: false, // We want to see all offers and filter ourselves
         max: '20' // Get more results to have better filtering options
