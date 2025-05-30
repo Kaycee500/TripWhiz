@@ -4,6 +4,7 @@ import BudgetAirlineTracker from "@/components/BudgetAirlineTracker";
 import PriceDropNotifier from "@/components/PriceDropNotifier";
 import CarryOnOnlyFilter from "@/components/CarryOnOnlyFilter";
 import TravelVPNTrick from "@/components/TravelVPNTrick";
+import MultiCityHackSimulator from "@/components/MultiCityHackSimulator";
 import SupportChatbot from "@/components/SupportChatbot";
 import { Search, TrendingUp, Bell } from "lucide-react";
 
@@ -30,6 +31,8 @@ export default function Home() {
             <CarryOnOnlyFilter />
           ) : activeItem === "vpn-trick" ? (
             <TravelVPNTrick />
+          ) : activeItem === "multi-city" ? (
+            <MultiCityHackSimulator />
           ) : (
             <div className="max-w-4xl mx-auto">
               {/* Hero Section */}

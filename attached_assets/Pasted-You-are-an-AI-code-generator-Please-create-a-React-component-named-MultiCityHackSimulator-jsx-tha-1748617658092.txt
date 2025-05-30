@@ -1,0 +1,58 @@
+You are an AI code generator. Please create a React component named `MultiCityHackSimulator.jsx` that uses Amadeus’s Self-Service Flight Offers Search API to simulate “hack” itineraries without any affiliate dependencies. This component should:
+
+1. **Setup & Imports**  
+   - Import React, hooks (`useState`, `useEffect`), Amadeus SDK, and Tailwind CSS.  
+   - Initialize Amadeus client:  
+     ```js
+     import Amadeus from '@amadeus';
+     const amadeus = new Amadeus({
+       clientId: process.env.REACT_APP_AMADEUS_CLIENT_ID,
+       clientSecret: process.env.REACT_APP_AMADEUS_CLIENT_SECRET,
+     });
+     ```
+
+2. **Form Inputs & Validation**  
+   - Render inputs for:  
+     • Origin IATA code (required)  
+     • Up to 3 Destinations IATA codes (comma-separated, required)  
+     • Corresponding departure dates for each leg (YYYY-MM-DD)  
+     • Maximum total budget in USD (required)  
+   - Validate that all IATA codes are 3 letters and dates are valid.
+
+3. **API Calls**  
+   - On submit, call Amadeus’s Multi-City Search endpoint:  
+     ```js
+     const response = await amadeus.shopping.flightOffersSearch.get({
+       originLocationCode: origin,
+       destinationLocationCode: destinations.split(',')[0], // handle first leg
+       departureDate: dates.split(',')[0],
+       // ... repeat or loop for each subsequent leg using response.data
+       currencyCode: 'USD',
+       maxPrice: budget,
+       adults: '1'
+     });
+     ```  
+   - Then, for each leg, perform a Low-Fare Search with the same parameters but swapping origin/destination and date to gather individual one-way deals.
+
+4. **Simulate Hacks**  
+   - Merge the cheapest one-way offers from each leg into combined itineraries.  
+   - Filter out any combinations where total price > budget.  
+   - Sort by total price ascending and pick top 5 combined itineraries.
+
+5. **State & UX**  
+   - Manage `formData`, `loading`, `error`, and `itineraries` via `useState`.  
+   - Show a Tailwind spinner while loading and an error message if no valid hacks are found.
+
+6. **Results Display**  
+   - Render each combined itinerary in a Tailwind card showing:  
+     • Each leg’s airline, flight number, departure/arrival times  
+     • Total price highlighted  
+     • Number of stops per leg  
+     • “Book Each Leg” buttons linking to Google Flights deep-links for manual booking  
+
+7. **Accessibility & Polishing**  
+   - Use semantic HTML and add `aria-labels`.  
+   - Animate card entrance with Framer Motion fade-in.  
+   - Ensure color contrast meets WCAG AA.
+
+Produce the complete `MultiCityHackSimulator.jsx` file with all necessary imports, environment-variable usage, Tailwind classes, looping logic for multiple legs, and inline comments explaining each step.  
