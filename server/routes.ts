@@ -251,6 +251,52 @@ Guidelines:
     }
   });
 
+  // Email subscription endpoint for landing page
+  app.post("/api/subscribe", async (req, res) => {
+    try {
+      const { email } = req.body;
+
+      // Validate email
+      if (!email || typeof email !== 'string') {
+        return res.status(400).json({
+          success: false,
+          message: 'Email is required'
+        });
+      }
+
+      // Basic email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        return res.status(400).json({
+          success: false,
+          message: 'Please provide a valid email address'
+        });
+      }
+
+      // Log the subscription (in production, you would save to database or send to email service)
+      console.log(`New beta subscription: ${email}`);
+
+      // TODO: Integrate with email marketing service (Mailchimp, ConvertKit, etc.)
+      // Example:
+      // await mailchimpAPI.lists.addListMember(listId, {
+      //   email_address: email,
+      //   status: 'subscribed'
+      // });
+
+      res.json({
+        success: true,
+        message: 'Successfully subscribed to TripWhiz beta'
+      });
+
+    } catch (error) {
+      console.error('Subscription error:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Failed to subscribe. Please try again later.'
+      });
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;
