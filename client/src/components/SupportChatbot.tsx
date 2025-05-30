@@ -100,8 +100,9 @@ export default function SupportChatbot() {
       // Re-add conversation history
       conversationDocs.forEach(doc => vectorStore.add(doc));
 
-      // Process each page and create embeddings
-      for (const page of siteMap) {
+      // Process each page and create embeddings with rate limiting
+      for (let i = 0; i < siteMap.length; i++) {
+        const page = siteMap[i];
         try {
           const embeddingResponse = await fetch('/api/openai/embeddings', {
             method: 'POST',
@@ -129,6 +130,13 @@ export default function SupportChatbot() {
             };
 
             vectorStore.add(document);
+          } else {
+            console.error(`Failed to get embedding for page ${page.url}:`, embeddingResponse.statusText);
+          }
+
+          // Rate limiting: Wait 100ms between requests to avoid hitting API limits
+          if (i < siteMap.length - 1) {
+            await new Promise(resolve => setTimeout(resolve, 100));
           }
         } catch (error) {
           console.error(`Failed to process page ${page.url}:`, error);

@@ -74,13 +74,7 @@ const navigationItems: NavigationItem[] = [
     href: "#carry-on",
     hoverColor: "group-hover:text-indigo-500"
   },
-  {
-    id: "ai-chat",
-    label: "AI Chat Assistant",
-    icon: Bot,
-    href: "#ai-chat",
-    hoverColor: "group-hover:text-orange-500"
-  }
+
 ];
 
 interface SidebarProps {
