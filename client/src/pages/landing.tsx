@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import AuthButton from "@/components/auth/AuthButton";
 
 const features = [
   {
@@ -132,12 +133,7 @@ export default function LandingPage() {
                 <p className="text-sm text-gray-600">Smart Travel Hacker</p>
               </div>
             </div>
-            <Button 
-              onClick={() => window.location.href = '/app'}
-              className="bg-gradient-to-r from-blue-500 to-orange-500 hover:from-blue-600 hover:to-orange-600"
-            >
-              Launch App
-            </Button>
+            <AuthButton />
           </div>
         </div>
       </header>
