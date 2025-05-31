@@ -2,9 +2,8 @@ name: Deploy to Vercel
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   deploy:
@@ -28,15 +27,25 @@ jobs:
       env:
         VITE_GA_ID: ${{ secrets.VITE_GA_ID }}
         VITE_SENTRY_DSN: ${{ secrets.VITE_SENTRY_DSN }}
+        AMADEUS_CLIENT_ID: ${{ secrets.AMADEUS_CLIENT_ID }}
+        AMADEUS_CLIENT_SECRET: ${{ secrets.AMADEUS_CLIENT_SECRET }}
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
         
     - name: Deploy to Vercel
       uses: amondnet/vercel-action@v25
       with:
         vercel-token: ${{ secrets.VERCEL_TOKEN }}
-        vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
         vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
         working-directory: ./
         vercel-args: '--prod'
+      env:
+        VITE_GA_ID: ${{ secrets.VITE_GA_ID }}
+        VITE_SENTRY_DSN: ${{ secrets.VITE_SENTRY_DSN }}
+        AMADEUS_CLIENT_ID: ${{ secrets.AMADEUS_CLIENT_ID }}
+        AMADEUS_CLIENT_SECRET: ${{ secrets.AMADEUS_CLIENT_SECRET }}
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
         
     - name: Notify deployment status
       if: always()
