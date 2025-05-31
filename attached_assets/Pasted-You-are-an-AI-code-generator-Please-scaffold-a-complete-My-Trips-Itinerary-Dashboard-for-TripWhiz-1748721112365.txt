@@ -1,0 +1,44 @@
+You are an AI code generator. Please scaffold a complete “My Trips” Itinerary Dashboard for TripWhiz using React, Tailwind CSS, Framer Motion, and Firebase Firestore. The page should let authenticated users view and manage their upcoming flight bookings. Generate the following files:
+
+1. **src/hooks/useBookings.js**  
+   - Create a custom hook that:  
+     • Imports `useState`, `useEffect` from React and `auth`, `db` from `firebase.js`.  
+     • Uses `onAuthStateChanged` to get the current `user.uid`.  
+     • Reads from Firestore collection `bookings/{userId}/trips`, subscribing to real-time updates (`onSnapshot`).  
+     • Returns `{ bookings, loading, error, cancelBooking(bookingId) }`.  
+       – `cancelBooking` deletes the document at `bookings/{userId}/trips/{bookingId}`.  
+   - Handle Firestore errors and set `error` if any.
+
+2. **src/components/MyTrips.jsx**  
+   - Import React, `useBookings` from your hook, and Framer Motion.  
+   - Render a header “My Trips” with a brief description.  
+   - Use `useBookings()` to get `{ bookings, loading, error, cancelBooking }`.  
+   - If `loading`, show a Tailwind spinner or `<motion.div>` loader.  
+   - If `error`, display a red error message.  
+   - If `bookings` is empty, show “You have no upcoming trips.”  
+   - Otherwise, map over `bookings` and render each booking in a responsive Tailwind card inside a `<motion.div>` fade-in sequence:  
+     • **Flight Summary**: “LAX → JFK on 2025-07-15”  
+     • **Airline & Flight Number**  
+     • **Departure & Arrival Times**  
+     • **Total Price** (highlighted)  
+     • **Status Badge**: “Confirmed” or “Canceled” (if you store status)  
+     • **“Cancel Trip” Button**: calls `cancelBooking(booking.id)` and shows a confirmation prompt before deletion.  
+   - Style cards with rounded corners, shadows, and responsive grid on desktop (`grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6`).  
+   - Animate each card hover with `whileHover={{ scale: 1.02 }}`.
+
+3. **src/contexts/BookingContext.jsx** (Optional—if you prefer context)  
+   - Create a context that uses `useBookings` internally and provides `{ bookings, loading, error, cancelBooking }` to any consumer.  
+   - Wrap your App or routes with `<BookingProvider>`.
+
+4. **src/App.jsx (or src/routes/AppRouter.jsx)**  
+   - Import `MyTrips` and add a new protected route for `/my-trips` using your existing `ProtectedRoute` component.  
+   - Ensure the sidebar navigation includes a “My Trips” link that points to `/my-trips`.  
+   - Wrap routes in `<BookingProvider>` if you created the context.
+
+5. **Firestore Rules** (Comment snippet for guidance)  
+   ```js
+   // In Firestore rules:
+   match /bookings/{userId}/trips/{tripId} {
+     allow read, delete: if request.auth != null && request.auth.uid == userId;
+     allow create, update: if request.auth != null && request.auth.uid == userId;
+   }

@@ -12,9 +12,11 @@ import {
   Plane,
   Menu,
   X,
-  User
+  User,
+  Calendar
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLocation } from "wouter";
 
 interface NavigationItem {
   id: string;
@@ -25,6 +27,13 @@ interface NavigationItem {
 }
 
 const navigationItems: NavigationItem[] = [
+  {
+    id: "my-trips",
+    label: "My Trips",
+    icon: Calendar,
+    href: "/my-trips",
+    hoverColor: "group-hover:text-purple-600"
+  },
   {
     id: "hidden-deals",
     label: "Hidden Deal Finder",

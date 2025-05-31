@@ -9,6 +9,7 @@ import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import LandingPage from "@/pages/landing";
 import Home from "@/pages/home";
 import Profile from "@/pages/profile";
+import MyTrips from "@/components/MyTrips";
 import SignUp from "@/components/auth/SignUp";
 import SignIn from "@/components/auth/SignIn";
 import NotFound from "@/pages/not-found";
@@ -80,6 +81,11 @@ function Router() {
       <Route path="/profile">
         <ProtectedRoute>
           <Profile />
+        </ProtectedRoute>
+      </Route>
+      <Route path="/my-trips">
+        <ProtectedRoute>
+          <MyTrips />
         </ProtectedRoute>
       </Route>
       <Route component={NotFound} />
