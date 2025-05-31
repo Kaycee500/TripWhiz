@@ -1,0 +1,60 @@
+You are an AI code generator. Please scaffold a full “User Authentication & Profiles” system for TripWhiz using React, Tailwind CSS, and Firebase (Auth + Firestore). Generate the following files:
+
+1. **src/firebase.js**  
+   - Initialize Firebase using environment variables:  
+     ```js
+     import { initializeApp } from 'firebase/app';
+     import { getAuth } from 'firebase/auth';
+     import { getFirestore } from 'firebase/firestore';
+
+     const firebaseConfig = {
+       apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+       authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+       projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+       storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+       messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+       appId: process.env.REACT_APP_FIREBASE_APP_ID,
+     };
+
+     const app = initializeApp(firebaseConfig);
+     export const auth = getAuth(app);
+     export const db = getFirestore(app);
+     ```
+
+2. **src/contexts/AuthContext.jsx**  
+   - Create a React context that wraps `auth` and provides `user`, `loading`, `signUp(email, password)`, `signIn(email, password)`, `signOut()`.  
+   - Use Firebase’s `onAuthStateChanged` to track auth state.
+
+3. **src/components/SignUp.jsx** & **src/components/SignIn.jsx**  
+   - Build forms with Tailwind for email/password registration and login.  
+   - Validate inputs (email format, password min length).  
+   - On success, redirect to `/profile`.
+
+4. **src/components/ProtectedRoute.jsx**  
+   - Higher-order component that checks `user` from `AuthContext`.  
+   - If not authenticated, redirect to `/signin`.
+
+5. **src/pages/Profile.jsx**  
+   - Protected page showing:  
+     • **Favorite Routes**: list and “Remove” button.  
+     • **Past Searches**: read-only list.  
+     • **Tracked Alerts**: list with toggles to enable/disable.  
+   - Use Firestore collections:  
+     - `favorites/{userId}/routes`  
+     - `searchHistory/{userId}/queries`  
+     - `alerts/{userId}/routes`  
+   - Provide “Add to Favorites” and “Add to History” helper functions you can call from your tracker components.
+
+6. **src/hooks/useUserData.js**  
+   - Custom hook to fetch and subscribe to the three Firestore collections for the current `user.uid`, returning `{ favorites, history, alerts, loading }` and CRUD functions: `addFavorite(route)`, `removeFavorite(routeId)`, `addHistory(query)`, `toggleAlert(routeId, enabled)`.
+
+7. **src/App.jsx**  
+   - Wrap your routes in `<AuthContextProvider>`.  
+   - Add `<ProtectedRoute>` for `/profile`.  
+   - Show “Sign In” / “Sign Up” links when `!user`, and “Sign Out” when `user`.
+
+8. **Styling & UX**  
+   - Use Tailwind utility classes for all forms, buttons, lists, and responsive layouts.  
+   - Add Framer Motion animations for page transitions and list item additions/removals.
+
+Ensure all imports, environment-variable usage, and Firestore rules comments are included. Produce each file’s full code with inline comments explaining key logic so it’s ready to integrate into TripWhiz.  
