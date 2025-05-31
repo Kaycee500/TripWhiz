@@ -93,9 +93,17 @@ interface SidebarProps {
 
 export default function Sidebar({ activeItem = "hidden-deals", onItemClick }: SidebarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [, setLocation] = useLocation();
 
   const handleItemClick = (itemId: string) => {
-    onItemClick?.(itemId);
+    const item = navigationItems.find(nav => nav.id === itemId);
+    if (item && item.href.startsWith('/')) {
+      // Navigate to a different page
+      setLocation(item.href);
+    } else {
+      // Handle section navigation within the current page
+      onItemClick?.(itemId);
+    }
     setIsMobileMenuOpen(false);
   };
 

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useBookings } from '@/hooks/useBookings';
 import { Button } from '@/components/ui/button';
+import { createSampleBooking } from '@/utils/sampleBookings';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
@@ -20,10 +21,11 @@ import {
 } from 'lucide-react';
 
 export default function MyTrips() {
-  const { bookings, loading, error, cancelBooking } = useBookings();
+  const { bookings, loading, error, cancelBooking, addBooking } = useBookings();
   const { toast } = useToast();
   const [, setLocation] = useLocation();
   const [cancelingId, setCancelingId] = useState<string | null>(null);
+  const [addingDemo, setAddingDemo] = useState(false);
 
   const handleCancelBooking = async (bookingId: string, bookingReference?: string) => {
     const confirmed = window.confirm(
@@ -47,6 +49,26 @@ export default function MyTrips() {
       });
     } finally {
       setCancelingId(null);
+    }
+  };
+
+  const handleAddDemoBooking = async () => {
+    setAddingDemo(true);
+    try {
+      const sampleBooking = createSampleBooking();
+      await addBooking(sampleBooking);
+      toast({
+        title: "Demo Booking Added",
+        description: "A sample booking has been added to demonstrate the dashboard.",
+      });
+    } catch (error) {
+      toast({
+        title: "Failed to Add Demo",
+        description: error instanceof Error ? error.message : "Failed to add demo booking.",
+        variant: "destructive"
+      });
+    } finally {
+      setAddingDemo(false);
     }
   };
 
@@ -165,13 +187,33 @@ export default function MyTrips() {
                 <p className="text-gray-600 mb-6">
                   You haven't booked any flights yet. Start planning your next adventure!
                 </p>
-                <Button
-                  onClick={() => setLocation('/app')}
-                  className="bg-gradient-to-r from-blue-500 to-orange-500 hover:from-blue-600 hover:to-orange-600"
-                >
-                  <Plus className="w-4 h-4 mr-2" />
-                  Search Flights
-                </Button>
+                <div className="flex gap-4 justify-center">
+                  <Button
+                    onClick={() => setLocation('/app')}
+                    className="bg-gradient-to-r from-blue-500 to-orange-500 hover:from-blue-600 hover:to-orange-600"
+                  >
+                    <Plus className="w-4 h-4 mr-2" />
+                    Search Flights
+                  </Button>
+                  <Button
+                    onClick={handleAddDemoBooking}
+                    disabled={addingDemo}
+                    variant="outline"
+                    className="border-blue-500 text-blue-600 hover:bg-blue-50"
+                  >
+                    {addingDemo ? (
+                      <>
+                        <div className="w-4 h-4 border border-blue-600 border-t-transparent rounded-full animate-spin mr-2"></div>
+                        Adding Demo...
+                      </>
+                    ) : (
+                      <>
+                        <Calendar className="w-4 h-4 mr-2" />
+                        Add Demo Booking
+                      </>
+                    )}
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           </motion.div>
