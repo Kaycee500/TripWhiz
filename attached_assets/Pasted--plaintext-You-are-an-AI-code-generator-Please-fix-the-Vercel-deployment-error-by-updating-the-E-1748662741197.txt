@@ -1,0 +1,64 @@
+```plaintext
+You are an AI code generator. Please fix the Vercel deployment error by updating the Express server entry file and route imports so that the `server/routes` module is correctly located. The project structure is:
+
+```
+
+/client                # React frontend
+/server
+├─ index.ts          # Express server entry point
+├─ routes
+│   ├─ index.ts      # Main routes file
+│   └─ users.ts      # Example route
+└─ controllers
+└─ ...
+
+````
+
+Apply these changes:
+
+1. **Update `server/index.ts`**  
+   - Change the import from `import routes from 'server/routes';` to a correct relative import:  
+     ```ts
+     import routes from './routes';
+     ```  
+   - Ensure you use the proper file extension if needed (`./routes/index.js` or `./routes/index.ts` depending on build output).  
+   - If using ES modules, make sure to reference the compiled JavaScript path in production (e.g., `import routes from './routes/index.js'`).
+
+2. **Verify `server/routes/index.ts`**  
+   - Ensure `routes/index.ts` exports a function or Router instance, for example:  
+     ```ts
+     import { Router } from 'express';
+     import usersController from './users';
+
+     const router = Router();
+     router.use('/users', usersController);
+     export default router;
+     ```  
+   - Confirm that `routes/index.ts` compiles to `routes/index.js` in production (check TypeScript build settings).
+
+3. **Adjust `vercel.json` if necessary**  
+   - If using TypeScript, confirm that Vercel’s build step compiles `server/index.ts` into `server/index.js`.  
+   - In `vercel.json`, ensure the API route mapping matches the compiled path:  
+     ```json
+     {
+       "version": 2,
+       "builds": [
+         {
+           "src": "client/package.json",
+           "use": "@vercel/static-build",
+           "config": { "distDir": "client/build" }
+         }
+       ],
+       "routes": [
+         { "src": "/api/(.*)", "dest": "server/index.js" },
+         { "handle": "filesystem" },
+         { "src": "/(.*)", "dest": "client/build/index.html" }
+       ]
+     }
+     ```
+
+4. **Optional: Add a `tsconfig.json` or adjust `package.json` scripts**  
+   - Ensure the build command transpiles TypeScript to JavaScript (e.g., `"build:server": "tsc -p server/tsconfig.json"`), and Vercel runs this before deployment.
+
+Produce the updated `server/index.ts`, `server/routes/index.ts`, and `vercel.json` file contents showing the corrected import paths and route configuration so that the deployment no longer fails with `ERR_MODULE_NOT_FOUND`.  
+````
