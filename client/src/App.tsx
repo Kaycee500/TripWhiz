@@ -87,6 +87,15 @@ function Router() {
   );
 }
 
+function AppContent() {
+  return (
+    <TooltipProvider>
+      <Router />
+      <Toaster />
+    </TooltipProvider>
+  );
+}
+
 function App() {
   useEffect(() => {
     // Initialize Google Analytics on app load
@@ -96,10 +105,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <TooltipProvider>
-          <Router />
-          <Toaster />
-        </TooltipProvider>
+        <AppContent />
       </AuthProvider>
     </QueryClientProvider>
   );

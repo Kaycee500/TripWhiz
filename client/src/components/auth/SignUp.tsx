@@ -78,6 +78,7 @@ export default function SignUp() {
       });
       setLocation('/profile');
     } catch (error: any) {
+      console.error('Sign up error:', error);
       let errorMessage = "Failed to create account";
       
       if (error.code === 'auth/email-already-in-use') {
@@ -86,6 +87,12 @@ export default function SignUp() {
         errorMessage = "Password is too weak";
       } else if (error.code === 'auth/invalid-email') {
         errorMessage = "Invalid email address";
+      } else if (error.code === 'auth/invalid-api-key') {
+        errorMessage = "Firebase configuration error. Please check API key settings.";
+      } else if (error.code === 'auth/operation-not-allowed') {
+        errorMessage = "Email/password authentication is not enabled. Please contact support.";
+      } else if (error.message) {
+        errorMessage = `Authentication error: ${error.message}`;
       }
 
       toast({
