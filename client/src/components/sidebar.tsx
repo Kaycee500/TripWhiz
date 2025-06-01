@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLocation } from "wouter";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface NavigationItem {
   id: string;
@@ -101,6 +102,7 @@ interface SidebarProps {
 export default function Sidebar({ activeItem = "hidden-deals", onItemClick }: SidebarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [, setLocation] = useLocation();
+  const { user, logout } = useAuth();
 
   const handleItemClick = (itemId: string) => {
     const item = navigationItems.find(nav => nav.id === itemId);
@@ -194,19 +196,83 @@ export default function Sidebar({ activeItem = "hidden-deals", onItemClick }: Si
         })}
       </nav>
 
-      {/* Footer */}
+      {/* User Profile Footer */}
       <div className="p-4 border-t border-gray-100">
-        <div className="bg-gradient-to-r from-blue-500 to-orange-500 p-4 rounded-xl text-white">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-              <User className="text-white w-5 h-5" />
+        {user ? (
+          <div className="bg-gradient-to-r from-blue-500 to-orange-500 p-4 rounded-xl text-white">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                  <User className="text-white w-5 h-5" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="font-semibold truncate">
+                    {user.displayName || user.email?.split('@')[0] || 'Traveler'}
+                  </p>
+                  <p className="text-sm opacity-90 truncate">
+                    {user.email}
+                  </p>
+                </div>
+              </div>
+              <Button
+                onClick={() => setLocation('/profile')}
+                variant="ghost"
+                size="sm"
+                className="text-white hover:bg-white hover:bg-opacity-20 p-2"
+                title="View Profile"
+              >
+                <User className="w-4 h-4" />
+              </Button>
             </div>
-            <div>
-              <p className="font-semibold">Travel Explorer</p>
-              <p className="text-sm opacity-90">Premium Member</p>
+            <div className="mt-3 flex gap-2">
+              <Button
+                onClick={() => setLocation('/profile')}
+                variant="outline"
+                size="sm"
+                className="flex-1 bg-white bg-opacity-20 border-white border-opacity-30 text-white hover:bg-white hover:text-blue-600 text-xs"
+              >
+                Profile
+              </Button>
+              <Button
+                onClick={logout}
+                variant="outline"
+                size="sm"
+                className="flex-1 bg-white bg-opacity-20 border-white border-opacity-30 text-white hover:bg-red-500 hover:border-red-500 text-xs"
+              >
+                Sign Out
+              </Button>
             </div>
           </div>
-        </div>
+        ) : (
+          <div className="bg-gradient-to-r from-gray-100 to-gray-200 p-4 rounded-xl">
+            <div className="flex items-center space-x-3 mb-3">
+              <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
+                <User className="text-gray-600 w-5 h-5" />
+              </div>
+              <div>
+                <p className="font-semibold text-gray-800">Guest User</p>
+                <p className="text-sm text-gray-600">Sign in for full access</p>
+              </div>
+            </div>
+            <div className="flex gap-2">
+              <Button
+                onClick={() => setLocation('/signin')}
+                size="sm"
+                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs"
+              >
+                Sign In
+              </Button>
+              <Button
+                onClick={() => setLocation('/signup')}
+                variant="outline"
+                size="sm"
+                className="flex-1 border-blue-600 text-blue-600 hover:bg-blue-50 text-xs"
+              >
+                Sign Up
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
@@ -310,19 +376,86 @@ export default function Sidebar({ activeItem = "hidden-deals", onItemClick }: Si
                 })}
               </nav>
 
-              {/* Mobile Footer */}
+              {/* Mobile User Profile Footer */}
               <div className="p-4 border-t border-gray-100">
-                <div className="bg-gradient-to-r from-blue-500 to-orange-500 p-4 rounded-xl text-white">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-                      <User className="text-white w-5 h-5" />
+                {user ? (
+                  <div className="bg-gradient-to-r from-blue-500 to-orange-500 p-4 rounded-xl text-white">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                          <User className="text-white w-5 h-5" />
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <p className="font-semibold truncate">
+                            {user.displayName || user.email?.split('@')[0] || 'Traveler'}
+                          </p>
+                          <p className="text-sm opacity-90 truncate">
+                            {user.email}
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <p className="font-semibold">Travel Explorer</p>
-                      <p className="text-sm opacity-90">Premium Member</p>
+                    <div className="mt-3 flex gap-2">
+                      <Button
+                        onClick={() => {
+                          setLocation('/profile');
+                          setIsMobileMenuOpen(false);
+                        }}
+                        variant="outline"
+                        size="sm"
+                        className="flex-1 bg-white bg-opacity-20 border-white border-opacity-30 text-white hover:bg-white hover:text-blue-600 text-xs"
+                      >
+                        Profile
+                      </Button>
+                      <Button
+                        onClick={() => {
+                          logout();
+                          setIsMobileMenuOpen(false);
+                        }}
+                        variant="outline"
+                        size="sm"
+                        className="flex-1 bg-white bg-opacity-20 border-white border-opacity-30 text-white hover:bg-red-500 hover:border-red-500 text-xs"
+                      >
+                        Sign Out
+                      </Button>
                     </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="bg-gradient-to-r from-gray-100 to-gray-200 p-4 rounded-xl">
+                    <div className="flex items-center space-x-3 mb-3">
+                      <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
+                        <User className="text-gray-600 w-5 h-5" />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-800">Guest User</p>
+                        <p className="text-sm text-gray-600">Sign in for full access</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button
+                        onClick={() => {
+                          setLocation('/signin');
+                          setIsMobileMenuOpen(false);
+                        }}
+                        size="sm"
+                        className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs"
+                      >
+                        Sign In
+                      </Button>
+                      <Button
+                        onClick={() => {
+                          setLocation('/signup');
+                          setIsMobileMenuOpen(false);
+                        }}
+                        variant="outline"
+                        size="sm"
+                        className="flex-1 border-blue-600 text-blue-600 hover:bg-blue-50 text-xs"
+                      >
+                        Sign Up
+                      </Button>
+                    </div>
+                  </div>
+                )}
               </div>
             </motion.aside>
           </div>
