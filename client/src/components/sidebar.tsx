@@ -454,7 +454,7 @@ export default function Sidebar({ activeItem = "home", onItemClick }: SidebarPro
                           {user.displayName || 'Elite Traveler'}
                         </p>
                         <div className="flex items-center space-x-2">
-                          <Crown className="w-4 h-4 text-amber-300" />
+                          <Crown className="w-4 h-4 text-amber-200" />
                           <p className="text-sm text-white/80 font-light">Platinum Member</p>
                         </div>
                       </div>

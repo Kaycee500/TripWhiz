@@ -27,7 +27,7 @@
   --radius: 0.75rem;
   
   /* Luxury color palette */
-  --luxury-gold: 212 175 55;
+  --luxury-gold: 180 162 137;
   --luxury-platinum: 229 228 226;
   --luxury-charcoal: 30 41 59;
   --luxury-pearl: 248 250 252;
@@ -83,7 +83,7 @@
   }
   
   .luxury-text-gradient {
-    background: linear-gradient(135deg, rgb(212, 175, 55) 0%, rgb(251, 191, 36) 100%);
+    background: linear-gradient(135deg, rgb(180, 162, 137) 0%, rgb(156, 140, 118) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -129,7 +129,7 @@
   
   .active-nav {
     background: linear-gradient(135deg, rgba(241, 245, 249, 0.9) 0%, rgba(248, 250, 252, 1) 100%);
-    border-left: 3px solid rgb(212, 175, 55);
+    border-left: 3px solid rgb(180, 162, 137);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   }
   
