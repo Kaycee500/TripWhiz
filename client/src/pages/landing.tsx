@@ -191,7 +191,7 @@ export default function LandingPage() {
                 type="submit" 
                 disabled={isSubmitting}
                 variant="outline"
-                className="px-8"
+                className="px-8 bg-slate-700 text-white border-slate-600 hover:bg-slate-600"
               >
                 {isSubmitting ? "Joining..." : "Join Beta"}
               </Button>
