@@ -28,6 +28,13 @@ interface NavigationItem {
 
 const navigationItems: NavigationItem[] = [
   {
+    id: "home",
+    label: "Home",
+    icon: Plane,
+    href: "#home",
+    hoverColor: "group-hover:text-blue-600"
+  },
+  {
     id: "my-trips",
     label: "My Trips",
     icon: Calendar,
