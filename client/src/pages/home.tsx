@@ -49,84 +49,107 @@ export default function Home() {
           ) : activeItem === "error-fare" ? (
             <ErrorFareScanner />
           ) : activeItem === "home" ? (
-            <div className="max-w-5xl mx-auto space-y-12">
+            <div className="max-w-6xl mx-auto space-y-16">
               {/* Hero Section */}
-              <div className="text-center py-16">
-                <h1 className="text-4xl md:text-5xl font-light text-gray-900 mb-6 tracking-tight">
-                  Smart Travel,{" "}
-                  <span className="font-medium bg-gradient-to-r from-blue-600 to-orange-600 bg-clip-text text-transparent">
-                    Simplified
+              <div className="text-center py-20">
+                <h1 className="text-5xl md:text-7xl font-extralight text-slate-900 mb-8 tracking-tight">
+                  Luxury Travel,{" "}
+                  <span className="font-light luxury-text-gradient">
+                    Reimagined
                   </span>
                 </h1>
-                <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                  Discover hidden deals, track prices, and explore destinations with intelligent travel tools
+                <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed font-light">
+                  Experience the pinnacle of intelligent travel planning with our curated collection of premium tools and destination insights
                 </p>
               </div>
 
               {/* Destination Explorer */}
-              <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
-                <div className="text-center mb-8">
-                  <CloudSun className="w-6 h-6 text-blue-500 mx-auto mb-3" />
-                  <h2 className="text-2xl font-light text-gray-900 mb-2">Destination Explorer</h2>
-                  <p className="text-gray-600">Live weather and events for your next adventure</p>
+              <div className="luxury-card rounded-3xl p-12">
+                <div className="text-center mb-12">
+                  <div className="w-12 h-12 luxury-gradient rounded-full flex items-center justify-center mx-auto mb-6">
+                    <CloudSun className="w-6 h-6 text-white" />
+                  </div>
+                  <h2 className="text-3xl font-light text-slate-900 mb-4">Destination Intelligence</h2>
+                  <p className="text-lg text-slate-600 font-light">Curated weather forecasts and exclusive events for discerning travelers</p>
                 </div>
                 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
                   {[
-                    { city: 'New York', flag: '🗽' },
-                    { city: 'Paris', flag: '🇫🇷' },
-                    { city: 'Tokyo', flag: '🇯🇵' },
-                    { city: 'London', flag: '🇬🇧' }
+                    { city: 'New York', flag: '🗽', desc: 'The City That Never Sleeps' },
+                    { city: 'Paris', flag: '🇫🇷', desc: 'City of Light' },
+                    { city: 'Tokyo', flag: '🇯🇵', desc: 'Modern Metropolis' },
+                    { city: 'London', flag: '🇬🇧', desc: 'Royal Capital' }
                   ].map((destination) => (
                     <Button
                       key={destination.city}
                       onClick={() => handleDestinationSelect(destination.city)}
                       variant="outline"
-                      className="h-16 flex flex-col items-center justify-center space-y-1 hover:bg-gray-50 hover:border-gray-300 transition-colors border-gray-200"
+                      className="h-24 flex flex-col items-center justify-center space-y-2 glass-effect hover:bg-white/90 transition-all duration-300 border-slate-200/50 group"
                     >
-                      <span className="text-xl">{destination.flag}</span>
-                      <span className="text-sm font-medium text-gray-700">{destination.city}</span>
+                      <span className="text-2xl mb-1">{destination.flag}</span>
+                      <span className="font-medium text-slate-900">{destination.city}</span>
+                      <span className="text-xs text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity">{destination.desc}</span>
                     </Button>
                   ))}
                 </div>
               </div>
 
               {/* Travel Tools */}
-              <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
-                <h2 className="text-2xl font-light text-gray-900 text-center mb-8">Travel Tools</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+              <div className="luxury-card rounded-3xl p-12">
+                <h2 className="text-3xl font-light text-slate-900 text-center mb-12">Premium Travel Suite</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                   {[
-                    { id: 'hidden-deals', icon: Search, title: 'Hidden Deals', desc: 'Find secret airline offers' },
-                    { id: 'budget-tracker', icon: TrendingUp, title: 'Price Tracker', desc: 'Monitor flight prices' },
-                    { id: 'price-drop', icon: Bell, title: 'Price Alerts', desc: 'Get notified of drops' }
+                    { 
+                      id: 'hidden-deals', 
+                      icon: Search, 
+                      title: 'Elite Deal Discovery', 
+                      desc: 'Uncover exclusive airline partnerships and unpublished premium fares',
+                      gradient: 'from-blue-600 to-indigo-700'
+                    },
+                    { 
+                      id: 'budget-tracker', 
+                      icon: TrendingUp, 
+                      title: 'Intelligent Price Monitoring', 
+                      desc: 'Real-time market analysis with predictive pricing algorithms',
+                      gradient: 'from-emerald-600 to-teal-700'
+                    },
+                    { 
+                      id: 'price-drop', 
+                      icon: Bell, 
+                      title: 'Priority Notifications', 
+                      desc: 'Instant alerts for significant price movements and limited offers',
+                      gradient: 'from-amber-500 to-orange-600'
+                    }
                   ].map((tool) => (
                     <div 
                       key={tool.id}
                       onClick={() => handleItemClick(tool.id)}
-                      className="p-6 border border-gray-200 rounded-xl hover:border-gray-300 hover:shadow-sm transition-all cursor-pointer group"
+                      className="glass-effect p-8 rounded-2xl hover:bg-white/90 transition-all duration-300 cursor-pointer group border-slate-200/50"
                     >
-                      <tool.icon className="w-6 h-6 text-gray-600 mb-4 group-hover:text-blue-600 transition-colors" />
-                      <h3 className="font-medium text-gray-900 mb-2">{tool.title}</h3>
-                      <p className="text-sm text-gray-600">{tool.desc}</p>
+                      <div className={`w-14 h-14 bg-gradient-to-br ${tool.gradient} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                        <tool.icon className="w-7 h-7 text-white" />
+                      </div>
+                      <h3 className="text-xl font-medium text-slate-900 mb-3">{tool.title}</h3>
+                      <p className="text-slate-600 font-light leading-relaxed">{tool.desc}</p>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Stats */}
-              <div className="text-center py-8">
-                <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto">
-                  <div>
-                    <div className="text-2xl font-light text-gray-900">$2.4M+</div>
-                    <div className="text-sm text-gray-600">Saved</div>
+              {/* Luxury Stats */}
+              <div className="text-center py-12">
+                <div className="grid grid-cols-3 gap-12 max-w-3xl mx-auto">
+                  <div className="group">
+                    <div className="text-4xl font-extralight text-slate-900 mb-3 group-hover:luxury-text-gradient transition-all duration-300">$2.4M+</div>
+                    <div className="text-slate-600 font-light tracking-wide">Total Savings</div>
                   </div>
-                  <div>
-                    <div className="text-2xl font-light text-gray-900">150K+</div>
-                    <div className="text-sm text-gray-600">Travelers</div>
+                  <div className="group">
+                    <div className="text-4xl font-extralight text-slate-900 mb-3 group-hover:luxury-text-gradient transition-all duration-300">150K+</div>
+                    <div className="text-slate-600 font-light tracking-wide">Elite Travelers</div>
                   </div>
-                  <div>
-                    <div className="text-2xl font-light text-gray-900">45%</div>
-                    <div className="text-sm text-gray-600">Avg Savings</div>
+                  <div className="group">
+                    <div className="text-4xl font-extralight text-slate-900 mb-3 group-hover:luxury-text-gradient transition-all duration-300">45%</div>
+                    <div className="text-slate-600 font-light tracking-wide">Average Savings</div>
                   </div>
                 </div>
               </div>

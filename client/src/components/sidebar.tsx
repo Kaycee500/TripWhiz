@@ -98,7 +98,7 @@ interface SidebarProps {
   onItemClick?: (itemId: string) => void;
 }
 
-export default function Sidebar({ activeItem = "hidden-deals", onItemClick }: SidebarProps) {
+export default function Sidebar({ activeItem = "home", onItemClick }: SidebarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [, setLocation] = useLocation();
 
