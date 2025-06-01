@@ -9,7 +9,8 @@ import HiddenDealFinder from "@/components/HiddenDealFinder";
 import ErrorFareScanner from "@/components/ErrorFareScanner";
 import SupportChatbot from "@/components/SupportChatbot";
 import WeatherEventsSidebar from "@/components/WeatherEventsSidebar";
-import { Search, TrendingUp, Bell } from "lucide-react";
+import { Search, TrendingUp, Bell, CloudSun, MapPin } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const [activeItem, setActiveItem] = useState("hidden-deals");
@@ -101,6 +102,33 @@ export default function Home() {
                 </div>
               </div>
 
+              {/* Weather & Events Demo Section */}
+              <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 mb-8">
+                <div className="flex items-center mb-4">
+                  <CloudSun className="w-6 h-6 text-blue-500 mr-3" />
+                  <h3 className="text-2xl font-bold text-gray-900">
+                    Destination Weather & Events
+                  </h3>
+                </div>
+                <p className="text-gray-600 mb-6">
+                  Get real-time weather forecasts and discover local events at your travel destinations.
+                </p>
+                
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {['New York', 'Paris', 'Tokyo', 'London'].map((city) => (
+                    <Button
+                      key={city}
+                      onClick={() => handleDestinationSelect(city)}
+                      variant="outline"
+                      className="flex items-center justify-center space-x-2 hover:bg-blue-50 hover:border-blue-300"
+                    >
+                      <MapPin className="w-4 h-4" />
+                      <span>{city}</span>
+                    </Button>
+                  ))}
+                </div>
+              </div>
+
               {/* Active Feature Display */}
               <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">
@@ -117,6 +145,15 @@ export default function Home() {
           )}
         </div>
       </main>
+
+      {/* Weather & Events Sidebar */}
+      {selectedDestination && (
+        <WeatherEventsSidebar
+          destination={selectedDestination}
+          isOpen={weatherSidebarOpen}
+          onClose={() => setWeatherSidebarOpen(false)}
+        />
+      )}
       
       {/* Support Chatbot - Available on all pages */}
       <SupportChatbot />
