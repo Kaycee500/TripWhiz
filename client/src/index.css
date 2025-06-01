@@ -146,4 +146,15 @@
     -webkit-box-shadow: 0 0 0 30px white inset !important;
     -webkit-text-fill-color: rgb(51 65 85) !important;
   }
+
+  /* Force override any potential yellow/bright styling */
+  .bg-yellow-400,
+  .bg-yellow-500,
+  .bg-amber-400,
+  .bg-orange-400,
+  [class*="yellow"],
+  [class*="amber"] {
+    background-color: rgb(71 85 105) !important;
+    color: white !important;
+  }
 }

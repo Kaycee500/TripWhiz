@@ -13,7 +13,7 @@ export default function AuthButton() {
         <Button
           onClick={() => setLocation('/profile')}
           variant="outline"
-          className="hidden sm:flex"
+          className="hidden sm:flex bg-slate-700 text-white border-slate-600 hover:bg-slate-600"
         >
           <User className="w-4 h-4 mr-2" />
           Profile
@@ -34,6 +34,7 @@ export default function AuthButton() {
       <Button
         onClick={() => setLocation('/signin')}
         variant="outline"
+        className="bg-white border-slate-300 text-slate-700 hover:bg-slate-50"
       >
         <LogIn className="w-4 h-4 mr-2" />
         Sign In
