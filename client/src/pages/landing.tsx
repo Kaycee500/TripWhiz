@@ -246,7 +246,7 @@ export default function LandingPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                  <Card className="h-full hover:shadow-lg transition-shadow duration-300 border-2 hover:border-blue-200">
+                  <Card className="h-full hover:shadow-lg transition-shadow duration-300 border-2 hover:border-blue-200 bg-white">
                     <CardContent className="p-6">
                       <div className={`w-12 h-12 bg-gradient-to-r ${feature.color} rounded-xl flex items-center justify-center mb-4`}>
                         <IconComponent className="text-white w-6 h-6" />

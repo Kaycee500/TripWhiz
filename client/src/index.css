@@ -157,4 +157,22 @@
     background-color: rgb(71 85 105) !important;
     color: white !important;
   }
+
+  /* Ensure all cards have white backgrounds */
+  [data-card], .card, .feature-card,
+  div[class*="rounded-lg border bg-card"],
+  div[class*="bg-card"] {
+    background-color: white !important;
+  }
+  
+  /* Force all potential yellow backgrounds to white */
+  * {
+    background-color: inherit;
+  }
+  
+  *[style*="background-color: yellow"],
+  *[style*="background: yellow"],
+  *[class*="bg-yellow"] {
+    background-color: white !important;
+  }
 }
