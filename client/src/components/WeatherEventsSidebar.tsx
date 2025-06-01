@@ -65,7 +65,7 @@ interface WeatherEventsSidebarProps {
 const getWeatherIcon = (condition: string) => {
   const lowerCondition = condition.toLowerCase();
   if (lowerCondition.includes('sunny') || lowerCondition.includes('clear')) {
-    return <Sun className="w-6 h-6 text-yellow-500" />;
+    return <Sun className="w-6 h-6 text-slate-500" />;
   } else if (lowerCondition.includes('rain')) {
     return <CloudRain className="w-6 h-6 text-blue-500" />;
   } else if (lowerCondition.includes('snow')) {

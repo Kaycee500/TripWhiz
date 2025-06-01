@@ -225,7 +225,7 @@ export default function Sidebar({ activeItem = "home", onItemClick }: SidebarPro
               <IconComponent 
                 className={`w-5 h-5 transition-colors duration-300 ${
                   isActive 
-                    ? "text-amber-600" 
+                    ? "text-stone-600" 
                     : "text-slate-500 group-hover:text-slate-700"
                 }`} 
               />
@@ -261,7 +261,7 @@ export default function Sidebar({ activeItem = "home", onItemClick }: SidebarPro
                       {user.displayName || 'Elite Traveler'}
                     </p>
                     <div className="flex items-center space-x-2">
-                      <Crown className="w-4 h-4 text-amber-300" />
+                      <Crown className="w-4 h-4 text-stone-300" />
                       <p className="text-sm text-white/80 font-light">Platinum Member</p>
                     </div>
                   </div>
@@ -454,7 +454,7 @@ export default function Sidebar({ activeItem = "home", onItemClick }: SidebarPro
                           {user.displayName || 'Elite Traveler'}
                         </p>
                         <div className="flex items-center space-x-2">
-                          <Crown className="w-4 h-4 text-amber-200" />
+                          <Crown className="w-4 h-4 text-stone-200" />
                           <p className="text-sm text-white/80 font-light">Platinum Member</p>
                         </div>
                       </div>
