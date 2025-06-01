@@ -158,13 +158,25 @@ export default function LandingPage() {
             </p>
           </motion.div>
 
-          {/* Beta Sign-up Form */}
+          {/* Action Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="max-w-md mx-auto mb-12"
+            className="max-w-2xl mx-auto mb-12"
           >
+            <div className="flex flex-col sm:flex-row gap-4 mb-6">
+              <Button 
+                onClick={() => window.location.href = '/app'}
+                className="bg-gradient-to-r from-blue-500 to-orange-500 hover:from-blue-600 hover:to-orange-600 px-8 flex-1"
+              >
+                Try Demo Now
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+              <AuthButton />
+            </div>
+            
+            {/* Beta Sign-up Form */}
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
               <Input
                 type="email"
@@ -178,10 +190,10 @@ export default function LandingPage() {
               <Button 
                 type="submit" 
                 disabled={isSubmitting}
-                className="bg-gradient-to-r from-blue-500 to-orange-500 hover:from-blue-600 hover:to-orange-600 px-8"
+                variant="outline"
+                className="px-8"
               >
-                {isSubmitting ? "Joining..." : "Join the Beta"}
-                <ArrowRight className="w-4 h-4 ml-2" />
+                {isSubmitting ? "Joining..." : "Join Beta"}
               </Button>
             </form>
             <p className="text-sm text-gray-500 mt-3">
