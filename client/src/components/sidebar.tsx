@@ -149,20 +149,22 @@ export default function Sidebar({ activeItem = "home", onItemClick }: SidebarPro
   const NavigationContent = () => (
     <>
       {/* Header */}
-      <div className="p-6 border-b border-gray-100">
-        <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-orange-500 rounded-xl flex items-center justify-center shadow-lg">
-            <Plane className="text-white w-5 h-5" />
+      <div className="p-8 border-b border-slate-200/30">
+        <div className="flex items-center space-x-4">
+          <div className="w-12 h-12 luxury-gradient rounded-2xl flex items-center justify-center shadow-2xl">
+            <Plane className="text-white w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold logo-gradient">TripWhiz</h1>
-            <p className="text-sm text-gray-500 font-medium">Smart Travel Booking</p>
+            <h1 className="text-3xl font-extralight text-slate-900 tracking-tight">
+              Trip<span className="luxury-text-gradient font-light">Whiz</span>
+            </h1>
+            <p className="text-sm text-slate-600 font-light tracking-wide">Premium Travel Intelligence</p>
           </div>
         </div>
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 p-4 space-y-2" role="navigation" aria-label="Main navigation">
+      <nav className="flex-1 p-6 space-y-3" role="navigation" aria-label="Main navigation">
         {navigationItems.map((item) => {
           const IconComponent = item.icon;
           const isActive = activeItem === item.id;
@@ -173,37 +175,38 @@ export default function Sidebar({ activeItem = "home", onItemClick }: SidebarPro
               onClick={() => handleItemClick(item.id)}
               onKeyDown={(e) => handleKeyDown(e, item.id)}
               className={`
-                nav-item-hover w-full flex items-center space-x-3 px-4 py-3 rounded-xl 
-                text-gray-700 font-medium group hover:text-gray-900 text-left
-                focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+                nav-item-hover w-full flex items-center space-x-4 px-5 py-4 rounded-2xl 
+                text-slate-700 font-light group hover:text-slate-900 text-left
+                focus:outline-none focus:ring-2 focus:ring-slate-300 focus:ring-offset-2
+                transition-all duration-300 ease-out
                 ${isActive ? "active-nav" : ""}
               `}
               aria-label={item.label}
               tabIndex={0}
             >
               <IconComponent 
-                className={`w-5 h-5 transition-colors duration-200 ${
+                className={`w-5 h-5 transition-colors duration-300 ${
                   isActive 
-                    ? "text-blue-600" 
-                    : `text-gray-500 ${item.hoverColor}`
+                    ? "text-amber-600" 
+                    : "text-slate-500 group-hover:text-slate-700"
                 }`} 
               />
-              <span className="text-base">{item.label}</span>
+              <span className="text-base tracking-wide">{item.label}</span>
             </button>
           );
         })}
       </nav>
 
       {/* Footer */}
-      <div className="p-4 border-t border-gray-100">
-        <div className="bg-gradient-to-r from-blue-500 to-orange-500 p-4 rounded-xl text-white">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-              <User className="text-white w-5 h-5" />
+      <div className="p-6 border-t border-slate-200/30">
+        <div className="luxury-gradient p-6 rounded-2xl text-white">
+          <div className="flex items-center space-x-4">
+            <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
+              <User className="text-white w-6 h-6" />
             </div>
             <div>
-              <p className="font-semibold">Travel Explorer</p>
-              <p className="text-sm opacity-90">Premium Member</p>
+              <p className="font-light text-lg tracking-wide">Elite Traveler</p>
+              <p className="text-sm text-white/80 font-light">Platinum Member</p>
             </div>
           </div>
         </div>
@@ -235,7 +238,7 @@ export default function Sidebar({ activeItem = "home", onItemClick }: SidebarPro
       </header>
 
       {/* Desktop Sidebar */}
-      <aside className="hidden md:flex md:flex-col md:w-80 bg-white shadow-xl border-r border-gray-200 sticky top-0 h-screen overflow-y-auto">
+      <aside className="hidden md:flex md:flex-col md:w-80 luxury-card border-r border-slate-200/50 sticky top-0 h-screen overflow-y-auto">
         <NavigationContent />
       </aside>
 
