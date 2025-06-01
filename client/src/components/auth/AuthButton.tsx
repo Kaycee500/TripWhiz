@@ -40,7 +40,7 @@ export default function AuthButton() {
       </Button>
       <Button
         onClick={() => setLocation('/signup')}
-        className="bg-gradient-to-r from-blue-500 to-orange-500 hover:from-blue-600 hover:to-orange-600"
+        className="bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-800 hover:to-slate-900"
       >
         Sign Up
       </Button>

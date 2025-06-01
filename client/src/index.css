@@ -137,4 +137,13 @@
     backdrop-filter: blur(8px);
     background: rgba(15, 23, 42, 0.6);
   }
+
+  /* Override browser autofill styling */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+    -webkit-text-fill-color: rgb(51 65 85) !important;
+  }
 }

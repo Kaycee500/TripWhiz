@@ -117,17 +117,17 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-stone-50">
       {/* Header */}
       <header className="bg-white/80 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-orange-500 rounded-xl flex items-center justify-center">
+              <div className="w-10 h-10 bg-gradient-to-br from-slate-600 to-slate-700 rounded-xl flex items-center justify-center">
                 <Plane className="text-white w-6 h-6" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-orange-600 bg-clip-text text-transparent">
+                <h1 className="text-2xl font-bold bg-gradient-to-r from-slate-700 to-slate-800 bg-clip-text text-transparent">
                   TripWhiz
                 </h1>
                 <p className="text-sm text-gray-600">Smart Travel Hacker</p>
@@ -146,9 +146,9 @@ export default function LandingPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6">
+            <h1 className="text-5xl md:text-7xl font-extralight text-slate-900 mb-6 tracking-tight">
               TripWhiz: Your{" "}
-              <span className="bg-gradient-to-r from-blue-600 to-orange-600 bg-clip-text text-transparent">
+              <span className="font-light bg-gradient-to-r from-slate-700 to-stone-700 bg-clip-text text-transparent">
                 Smart Travel Hacker
               </span>
             </h1>
@@ -168,7 +168,7 @@ export default function LandingPage() {
             <div className="flex flex-col sm:flex-row gap-4 mb-6">
               <Button 
                 onClick={() => window.location.href = '/app'}
-                className="bg-gradient-to-r from-blue-500 to-orange-500 hover:from-blue-600 hover:to-orange-600 px-8 flex-1"
+                className="bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-800 hover:to-slate-900 px-8 flex-1"
               >
                 Try Demo Now
                 <ArrowRight className="w-4 h-4 ml-2" />
@@ -183,7 +183,7 @@ export default function LandingPage() {
                 placeholder="Enter your email for beta access"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="flex-1"
+                className="flex-1 bg-white border-slate-200 focus:border-slate-400 focus:ring-slate-200"
                 required
                 aria-label="Email address for beta access"
               />
