@@ -84,11 +84,11 @@ export default function Home() {
                       key={destination.city}
                       onClick={() => handleDestinationSelect(destination.city)}
                       variant="outline"
-                      className="h-24 flex flex-col items-center justify-center space-y-2 glass-effect hover:bg-white/90 transition-all duration-300 border-slate-200/50 group"
+                      className="h-24 flex flex-col items-center justify-center space-y-2 glass-effect hover:bg-white/90 transition-all duration-300 border-slate-200/50 group bg-slate-700 text-white"
                     >
                       <span className="text-2xl mb-1">{destination.flag}</span>
-                      <span className="font-medium text-slate-900">{destination.city}</span>
-                      <span className="text-xs text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity">{destination.desc}</span>
+                      <span className="font-medium text-white">{destination.city}</span>
+                      <span className="text-xs text-slate-200 opacity-0 group-hover:opacity-100 transition-opacity">{destination.desc}</span>
                     </Button>
                   ))}
                 </div>
