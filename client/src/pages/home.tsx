@@ -8,13 +8,21 @@ import MultiCityHackSimulator from "@/components/MultiCityHackSimulator";
 import HiddenDealFinder from "@/components/HiddenDealFinder";
 import ErrorFareScanner from "@/components/ErrorFareScanner";
 import SupportChatbot from "@/components/SupportChatbot";
+import WeatherEventsSidebar from "@/components/WeatherEventsSidebar";
 import { Search, TrendingUp, Bell } from "lucide-react";
 
 export default function Home() {
   const [activeItem, setActiveItem] = useState("hidden-deals");
+  const [weatherSidebarOpen, setWeatherSidebarOpen] = useState(false);
+  const [selectedDestination, setSelectedDestination] = useState("");
 
   const handleItemClick = (itemId: string) => {
     setActiveItem(itemId);
+  };
+
+  const handleDestinationSelect = (destination: string) => {
+    setSelectedDestination(destination);
+    setWeatherSidebarOpen(true);
   };
 
   return (
