@@ -168,7 +168,7 @@ export default function LandingPage() {
             <div className="flex flex-col sm:flex-row gap-4 mb-6">
               <Button 
                 onClick={() => window.location.href = '/app'}
-                className="bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-800 hover:to-slate-900 px-8 flex-1"
+                className="bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-800 hover:to-slate-900 px-8 flex-1 text-white"
               >
                 Try Demo Now
                 <ArrowRight className="w-4 h-4 ml-2" />
