@@ -352,7 +352,7 @@ export default function TravelVPNTrick() {
                   <Badge 
                     className={`
                       ${vpnStatus === 'connected' ? 'bg-green-500 text-white' : 
-                        vpnStatus === 'connecting' ? 'bg-yellow-500 text-white' : 
+                        vpnStatus === 'connecting' ? 'bg-slate-500 text-white' : 
                         'bg-gray-500 text-white'}
                     `}
                   >
