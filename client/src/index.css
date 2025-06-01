@@ -80,11 +80,17 @@
   
   .nav-item-hover {
     @apply transition-all duration-200 ease-in-out;
+    position: relative;
   }
   
   .nav-item-hover:hover {
-    @apply transform translate-x-1;
+    @apply transform translate-x-1 shadow-sm;
     background: linear-gradient(135deg, #EBF4FF 0%, #DBEAFE 100%);
+    border-left: 3px solid #3B82F6;
+  }
+  
+  .nav-item-hover:focus {
+    @apply outline-none ring-2 ring-blue-500 ring-offset-2;
   }
   
   .active-nav {

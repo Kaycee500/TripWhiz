@@ -9,7 +9,7 @@ import HiddenDealFinder from "@/components/HiddenDealFinder";
 import ErrorFareScanner from "@/components/ErrorFareScanner";
 import SupportChatbot from "@/components/SupportChatbot";
 import WeatherEventsSidebar from "@/components/WeatherEventsSidebar";
-import { Search, TrendingUp, Bell, CloudSun, MapPin } from "lucide-react";
+import { Search, TrendingUp, Bell, CloudSun, MapPin, Plane } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
@@ -50,18 +50,25 @@ export default function Home() {
             <ErrorFareScanner />
           ) : activeItem === "home" ? (
             <div className="max-w-6xl mx-auto">
-              {/* Hero Section */}
+              {/* Hero Section with Enhanced Branding */}
               <div className="text-center mb-16">
-                <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-                  Welcome to{" "}
-                  <span className="bg-gradient-to-r from-blue-600 to-orange-600 bg-clip-text text-transparent">
-                    TripWhiz
-                  </span>
-                </h1>
+                <div className="flex items-center justify-center mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-orange-500 rounded-2xl flex items-center justify-center mr-4">
+                    <Plane className="text-white w-8 h-8" />
+                  </div>
+                  <h1 className="text-5xl md:text-6xl font-bold text-gray-900">
+                    <span className="bg-gradient-to-r from-blue-600 to-orange-600 bg-clip-text text-transparent">
+                      TripWhiz
+                    </span>
+                  </h1>
+                </div>
                 <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
-                  Your AI-powered travel companion with advanced booking strategies, 
-                  real-time price tracking, and destination insights.
+                  Find the best travel deals with AI-powered flight search, budget tracking, and hidden deal discovery.
                 </p>
+                <div className="inline-flex items-center bg-blue-50 px-4 py-2 rounded-full border border-blue-200">
+                  <div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div>
+                  <span className="text-sm text-blue-700 font-medium">Live flight data • Real-time pricing</span>
+                </div>
               </div>
 
               {/* Quick Stats */}
@@ -84,6 +91,121 @@ export default function Home() {
                 </div>
               </div>
 
+              {/* Enhanced Travel Search Form */}
+              <div className="max-w-4xl mx-auto mb-16">
+                <div className="bg-white p-8 rounded-3xl shadow-xl border border-gray-100">
+                  <div className="text-center mb-8">
+                    <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                      Search Your Perfect Trip
+                    </h2>
+                    <p className="text-gray-600">
+                      Find flights, compare prices, and discover hidden deals
+                    </p>
+                  </div>
+                  
+                  <form className="space-y-6" role="search" aria-label="Trip search form">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label htmlFor="departure-date" className="block text-sm font-medium text-gray-700 mb-2">
+                          Departure Date
+                        </label>
+                        <input
+                          type="date"
+                          id="departure-date"
+                          name="departure-date"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                          aria-describedby="departure-help"
+                          required
+                        />
+                        <p id="departure-help" className="text-xs text-gray-500 mt-1">Select your departure date</p>
+                      </div>
+                      
+                      <div>
+                        <label htmlFor="return-date" className="block text-sm font-medium text-gray-700 mb-2">
+                          Return Date
+                        </label>
+                        <input
+                          type="date"
+                          id="return-date" 
+                          name="return-date"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                          aria-describedby="return-help"
+                        />
+                        <p id="return-help" className="text-xs text-gray-500 mt-1">Optional for one-way trips</p>
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label htmlFor="from-location" className="block text-sm font-medium text-gray-700 mb-2">
+                          From
+                        </label>
+                        <input
+                          type="text"
+                          id="from-location"
+                          name="from-location"
+                          placeholder="Enter city or airport (e.g., New York JFK)"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                          aria-describedby="from-help"
+                          required
+                        />
+                        <p id="from-help" className="text-xs text-gray-500 mt-1">City name or airport code</p>
+                      </div>
+                      
+                      <div>
+                        <label htmlFor="to-location" className="block text-sm font-medium text-gray-700 mb-2">
+                          To
+                        </label>
+                        <input
+                          type="text"
+                          id="to-location"
+                          name="to-location"
+                          placeholder="Enter destination (e.g., Paris CDG)"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                          aria-describedby="to-help"
+                          required
+                        />
+                        <p id="to-help" className="text-xs text-gray-500 mt-1">Your destination city or airport</p>
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label htmlFor="budget" className="block text-sm font-medium text-gray-700 mb-2">
+                          Max Budget (USD)
+                        </label>
+                        <div className="relative">
+                          <span className="absolute left-3 top-3 text-gray-500">$</span>
+                          <input
+                            type="number"
+                            id="budget"
+                            name="budget"
+                            placeholder="500"
+                            min="50"
+                            max="10000"
+                            step="50"
+                            className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                            aria-describedby="budget-help"
+                          />
+                        </div>
+                        <p id="budget-help" className="text-xs text-gray-500 mt-1">Optional: Set your maximum budget</p>
+                      </div>
+                      
+                      <div className="flex items-end">
+                        <Button
+                          type="submit"
+                          className="w-full h-12 bg-gradient-to-r from-blue-600 to-orange-600 hover:from-blue-700 hover:to-orange-700 text-white font-semibold rounded-lg transition-all duration-200 hover:scale-105 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                          aria-label="Search for trips"
+                        >
+                          <Search className="w-5 h-5 mr-2" />
+                          Search Trips
+                        </Button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
               {/* Destination Weather & Events Section */}
               <div className="bg-gradient-to-br from-blue-50 via-white to-orange-50 p-8 rounded-3xl shadow-xl border border-gray-100 mb-16">
                 <div className="text-center mb-8">
@@ -99,22 +221,23 @@ export default function Home() {
                   </p>
                 </div>
                 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" role="group" aria-label="Popular destinations">
                   {[
-                    { city: 'New York', flag: '🗽', temp: '22°C' },
-                    { city: 'Paris', flag: '🇫🇷', temp: '18°C' },
-                    { city: 'Tokyo', flag: '🇯🇵', temp: '25°C' },
-                    { city: 'London', flag: '🇬🇧', temp: '15°C' }
+                    { city: 'New York', flag: '🗽', temp: '22°C', country: 'United States' },
+                    { city: 'Paris', flag: '🇫🇷', temp: '18°C', country: 'France' },
+                    { city: 'Tokyo', flag: '🇯🇵', temp: '25°C', country: 'Japan' },
+                    { city: 'London', flag: '🇬🇧', temp: '15°C', country: 'United Kingdom' }
                   ].map((destination) => (
                     <Button
                       key={destination.city}
                       onClick={() => handleDestinationSelect(destination.city)}
                       variant="outline"
-                      className="h-20 flex flex-col items-center justify-center space-y-2 hover:bg-blue-50 hover:border-blue-300 hover:scale-105 transition-all duration-200 bg-white"
+                      className="h-20 flex flex-col items-center justify-center space-y-2 hover:bg-blue-50 hover:border-blue-300 hover:scale-105 transition-all duration-200 bg-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                      aria-label={`View weather and events for ${destination.city}, ${destination.country}`}
                     >
                       <div className="flex items-center space-x-2">
-                        <span className="text-2xl">{destination.flag}</span>
-                        <MapPin className="w-4 h-4 text-blue-500" />
+                        <span className="text-2xl" aria-hidden="true">{destination.flag}</span>
+                        <MapPin className="w-4 h-4 text-blue-500" aria-hidden="true" />
                       </div>
                       <div className="text-center">
                         <div className="font-semibold">{destination.city}</div>
