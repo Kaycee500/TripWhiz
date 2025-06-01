@@ -29,49 +29,49 @@ const features = [
     icon: TrendingUp,
     title: "Budget Airline Tracker",
     description: "Real-time flight price comparison using live Amadeus data. Track and compare budget airline prices instantly.",
-    color: "from-blue-500 to-blue-600"
+    color: "from-slate-600 to-slate-700"
   },
   {
     icon: Bell,
     title: "Price Drop Notifier",
     description: "Automatic price monitoring with browser notifications. Get instant alerts when flight prices drop.",
-    color: "from-green-500 to-emerald-600"
+    color: "from-slate-700 to-slate-800"
   },
   {
     icon: Luggage,
     title: "Carry-On Only Filter",
     description: "Find flights without checked baggage fees. Advanced filtering for true carry-on deals.",
-    color: "from-indigo-500 to-purple-600"
+    color: "from-stone-600 to-stone-700"
   },
   {
     icon: Shield,
     title: "Travel VPN Trick",
     description: "Search flights from different country markets for better regional pricing across 12 global locations.",
-    color: "from-green-500 to-blue-600"
+    color: "from-zinc-600 to-zinc-700"
   },
   {
     icon: Route,
     title: "Multi-City Hack Builder",
     description: "Build complex multi-city routes to save money vs traditional round-trip tickets with route optimization.",
-    color: "from-purple-500 to-pink-600"
+    color: "from-gray-600 to-gray-700"
   },
   {
     icon: Eye,
     title: "Hidden Deal Finder",
     description: "Discover hidden-city ticketing opportunities and secret deals using advanced routing strategies.",
-    color: "from-purple-500 to-indigo-600"
+    color: "from-slate-600 to-slate-800"
   },
   {
     icon: Bug,
     title: "Error Fare Scanner",
     description: "Detect airline pricing mistakes and error fares by comparing against historical price data.",
-    color: "from-red-500 to-orange-600"
+    color: "from-stone-700 to-stone-800"
   },
   {
     icon: Bot,
     title: "AI Support Assistant",
     description: "Intelligent chatbot with self-training knowledge base to help with all travel booking questions.",
-    color: "from-blue-500 to-purple-600"
+    color: "from-zinc-700 to-zinc-800"
   }
 ];
 
@@ -209,15 +209,15 @@ export default function LandingPage() {
             className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20"
           >
             <div className="text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-2">$2.4M+</div>
+              <div className="text-4xl font-bold text-slate-700 mb-2">$2.4M+</div>
               <div className="text-gray-600">Saved by users</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-orange-500 mb-2">150K+</div>
+              <div className="text-4xl font-bold text-slate-800 mb-2">150K+</div>
               <div className="text-gray-600">Happy travelers</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-purple-600 mb-2">45%</div>
+              <div className="text-4xl font-bold text-stone-700 mb-2">45%</div>
               <div className="text-gray-600">Average savings</div>
             </div>
           </motion.div>

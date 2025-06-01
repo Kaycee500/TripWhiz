@@ -104,21 +104,21 @@ export default function Home() {
                       icon: Search, 
                       title: 'Elite Deal Discovery', 
                       desc: 'Uncover exclusive airline partnerships and unpublished premium fares',
-                      gradient: 'from-blue-600 to-indigo-700'
+                      gradient: 'from-slate-600 to-slate-700'
                     },
                     { 
                       id: 'budget-tracker', 
                       icon: TrendingUp, 
                       title: 'Intelligent Price Monitoring', 
                       desc: 'Real-time market analysis with predictive pricing algorithms',
-                      gradient: 'from-emerald-600 to-teal-700'
+                      gradient: 'from-slate-700 to-slate-800'
                     },
                     { 
                       id: 'price-drop', 
                       icon: Bell, 
                       title: 'Priority Notifications', 
                       desc: 'Instant alerts for significant price movements and limited offers',
-                      gradient: 'from-amber-500 to-orange-600'
+                      gradient: 'from-stone-600 to-stone-700'
                     }
                   ].map((tool) => (
                     <div 
