@@ -21,7 +21,7 @@ export default function AuthButton() {
         <Button
           onClick={logout}
           variant="outline"
-          className="text-red-600 hover:text-red-700 hover:bg-red-50"
+          className="text-slate-50 bg-slate-700 border-slate-600 hover:text-red-700 hover:bg-red-50"
         >
           Sign Out
         </Button>
