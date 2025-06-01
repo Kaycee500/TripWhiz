@@ -375,7 +375,7 @@ export default function Profile() {
                               <h3 className="text-lg font-semibold text-gray-900">
                                 {alert.origin} → {alert.destination}
                               </h3>
-                              <span className="bg-slate-100 text-slate-800 text-sm font-medium px-2 py-1 rounded">
+                              <span className="bg-yellow-100 text-yellow-800 text-sm font-medium px-2 py-1 rounded">
                                 Target: {alert.currency} {alert.targetPrice}
                               </span>
                               <Switch

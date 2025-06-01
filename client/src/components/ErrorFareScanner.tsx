@@ -609,8 +609,8 @@ export default function ErrorFareScanner() {
                         </div>
 
                         {/* Warning */}
-                        <div className="bg-slate-50 border border-slate-200 rounded-lg p-3">
-                          <div className="flex items-start space-x-2 text-slate-800">
+                        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
+                          <div className="flex items-start space-x-2 text-yellow-800">
                             <AlertCircle className="w-4 h-4 mt-0.5" />
                             <div>
                               <p className="font-medium text-sm">Act Fast!</p>

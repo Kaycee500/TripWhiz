@@ -13,7 +13,7 @@ export default function AuthButton() {
         <Button
           onClick={() => setLocation('/profile')}
           variant="outline"
-          className="hidden sm:flex bg-slate-700 text-white border-slate-600 hover:bg-slate-600"
+          className="hidden sm:flex"
         >
           <User className="w-4 h-4 mr-2" />
           Profile
@@ -21,7 +21,7 @@ export default function AuthButton() {
         <Button
           onClick={logout}
           variant="outline"
-          className="text-slate-50 bg-slate-700 border-slate-600 hover:text-red-700 hover:bg-red-50"
+          className="text-red-600 hover:text-red-700 hover:bg-red-50"
         >
           Sign Out
         </Button>
@@ -34,14 +34,13 @@ export default function AuthButton() {
       <Button
         onClick={() => setLocation('/signin')}
         variant="outline"
-        className="bg-white border-slate-300 text-slate-700 hover:bg-slate-50"
       >
         <LogIn className="w-4 h-4 mr-2" />
         Sign In
       </Button>
       <Button
         onClick={() => setLocation('/signup')}
-        className="bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-800 hover:to-slate-900"
+        className="bg-gradient-to-r from-blue-500 to-orange-500 hover:from-blue-600 hover:to-orange-600"
       >
         Sign Up
       </Button>

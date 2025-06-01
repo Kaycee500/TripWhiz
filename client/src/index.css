@@ -1,61 +1,63 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: 251 252 254;
-  --foreground: 15 23 42;
-  --muted: 248 250 252;
-  --muted-foreground: 100 116 139;
-  --popover: 255 255 255;
-  --popover-foreground: 15 23 42;
-  --card: 255 255 255;
-  --card-foreground: 15 23 42;
-  --border: 226 232 240;
-  --input: 226 232 240;
-  --primary: 15 23 42;
-  --primary-foreground: 248 250 252;
-  --secondary: 241 245 249;
-  --secondary-foreground: 51 65 85;
-  --accent: 241 245 249;
-  --accent-foreground: 51 65 85;
-  --destructive: 239 68 68;
-  --destructive-foreground: 248 250 252;
-  --ring: 99 102 241;
-  --radius: 0.75rem;
+  --background: 0 0% 100%;
+  --foreground: 20 14.3% 4.1%;
+  --muted: 60 4.8% 95.9%;
+  --muted-foreground: 25 5.3% 44.7%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 20 14.3% 4.1%;
+  --card: 0 0% 100%;
+  --card-foreground: 20 14.3% 4.1%;
+  --border: 20 5.9% 90%;
+  --input: 20 5.9% 90%;
+  --primary: 207 90% 54%;
+  --primary-foreground: 211 100% 99%;
+  --secondary: 60 4.8% 95.9%;
+  --secondary-foreground: 24 9.8% 10%;
+  --accent: 60 4.8% 95.9%;
+  --accent-foreground: 24 9.8% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --ring: 20 14.3% 4.1%;
+  --radius: 0.5rem;
   
-  /* Luxury color palette */
-  --luxury-gold: 180 162 137;
-  --luxury-platinum: 229 228 226;
-  --luxury-charcoal: 30 41 59;
-  --luxury-pearl: 248 250 252;
-  --luxury-sapphire: 29 78 216;
-  --luxury-emerald: 5 150 105;
+  /* TripWhiz custom colors */
+  --trip-blue: 207 90% 54%;
+  --trip-blue-dark: 224 78% 55%;
+  --trip-orange: 22 92% 52%;
+  --trip-orange-light: 24 90% 58%;
 }
 
 .dark {
-  --background: 15 23 42;
-  --foreground: 248 250 252;
-  --muted: 30 41 59;
-  --muted-foreground: 148 163 184;
-  --popover: 30 41 59;
-  --popover-foreground: 248 250 252;
-  --card: 30 41 59;
-  --card-foreground: 248 250 252;
-  --border: 51 65 85;
-  --input: 51 65 85;
-  --primary: 248 250 252;
-  --primary-foreground: 15 23 42;
-  --secondary: 51 65 85;
-  --secondary-foreground: 226 232 240;
-  --accent: 51 65 85;
-  --accent-foreground: 226 232 240;
-  --destructive: 220 38 38;
-  --destructive-foreground: 248 250 252;
-  --ring: 147 197 253;
-  --radius: 0.75rem;
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --primary: 207 90% 54%;
+  --primary-foreground: 211 100% 99%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 240 4.9% 83.9%;
+  --radius: 0.5rem;
+  
+  /* TripWhiz custom colors for dark mode */
+  --trip-blue: 207 90% 54%;
+  --trip-blue-dark: 224 78% 55%;
+  --trip-orange: 22 92% 52%;
+  --trip-orange-light: 24 90% 58%;
 }
 
 @layer base {
@@ -64,115 +66,34 @@
   }
 
   body {
-    @apply antialiased bg-background text-foreground;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-weight: 300;
-    letter-spacing: -0.01em;
-    background: linear-gradient(135deg, rgb(251, 252, 254) 0%, rgb(248, 250, 252) 100%);
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
-    font-weight: 300;
-    letter-spacing: -0.025em;
+    @apply font-sans antialiased bg-background text-foreground;
   }
 }
 
 @layer components {
-  .luxury-gradient {
-    background: linear-gradient(135deg, rgb(15, 23, 42) 0%, rgb(30, 41, 59) 50%, rgb(51, 65, 85) 100%);
-  }
-  
-  .luxury-text-gradient {
-    background: linear-gradient(135deg, rgb(180, 162, 137) 0%, rgb(156, 140, 118) 100%);
+  .logo-gradient {
+    background: linear-gradient(135deg, hsl(var(--trip-blue)) 0%, hsl(var(--trip-orange)) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
   
-  .luxury-card {
-    @apply bg-white/90 backdrop-blur-sm border border-slate-200/50;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.05);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  .luxury-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.1);
-  }
-  
-  .luxury-button {
-    @apply text-white font-medium tracking-wide;
-    background: linear-gradient(135deg, rgb(15, 23, 42) 0%, rgb(30, 41, 59) 100%);
-    box-shadow: 0 4px 14px 0 rgba(15, 23, 42, 0.25);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  .luxury-button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 8px 25px 0 rgba(15, 23, 42, 0.35);
-  }
-  
-  .glass-effect {
-    @apply bg-white/80 backdrop-blur-md border border-white/30;
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-  }
-  
   .nav-item-hover {
-    @apply transition-all duration-300 ease-out;
+    @apply transition-all duration-200 ease-in-out;
   }
   
   .nav-item-hover:hover {
     @apply transform translate-x-1;
-    background: linear-gradient(135deg, rgba(241, 245, 249, 0.8) 0%, rgba(248, 250, 252, 0.9) 100%);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    background: linear-gradient(135deg, #EBF4FF 0%, #DBEAFE 100%);
   }
   
   .active-nav {
-    background: linear-gradient(135deg, rgba(241, 245, 249, 0.9) 0%, rgba(248, 250, 252, 1) 100%);
-    border-left: 3px solid rgb(180, 162, 137);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    background: linear-gradient(135deg, #EBF4FF 0%, #DBEAFE 100%);
+    border-left: 4px solid hsl(var(--trip-blue));
   }
   
   .mobile-overlay {
-    backdrop-filter: blur(8px);
-    background: rgba(15, 23, 42, 0.6);
-  }
-
-  /* Override browser autofill styling */
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus,
-  input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px white inset !important;
-    -webkit-text-fill-color: rgb(51 65 85) !important;
-  }
-
-  /* Force override any potential yellow/bright styling */
-  .bg-yellow-400,
-  .bg-yellow-500,
-  .bg-amber-400,
-  .bg-orange-400,
-  [class*="yellow"],
-  [class*="amber"] {
-    background-color: rgb(71 85 105) !important;
-    color: white !important;
-  }
-
-  /* Ensure all cards have white backgrounds */
-  [data-card], .card, .feature-card,
-  div[class*="rounded-lg border bg-card"],
-  div[class*="bg-card"] {
-    background-color: white !important;
-  }
-  
-  /* Force all potential yellow backgrounds to white */
-  * {
-    background-color: inherit;
-  }
-  
-  *[style*="background-color: yellow"],
-  *[style*="background: yellow"],
-  *[class*="bg-yellow"] {
-    background-color: white !important;
+    backdrop-filter: blur(4px);
+    background: rgba(0, 0, 0, 0.5);
   }
 }

@@ -324,14 +324,14 @@ export default function PriceDropNotifier() {
 
         {/* Notification Permission Status */}
         {notificationPermission !== 'granted' && (
-          <div className="bg-slate-50 border border-slate-200 rounded-lg p-4 mb-6">
+          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
             <div className="flex items-center space-x-2">
-              <AlertCircle className="w-5 h-5 text-slate-600" />
+              <AlertCircle className="w-5 h-5 text-yellow-600" />
               <div>
-                <p className="text-slate-800 font-medium">
+                <p className="text-yellow-800 font-medium">
                   Browser notifications are {notificationPermission === 'denied' ? 'blocked' : 'not enabled'}
                 </p>
-                <p className="text-slate-700 text-sm">
+                <p className="text-yellow-700 text-sm">
                   {notificationPermission === 'denied' 
                     ? 'Please enable notifications in your browser settings to receive price drop alerts.'
                     : 'Click "Allow" when prompted to receive instant price drop notifications.'

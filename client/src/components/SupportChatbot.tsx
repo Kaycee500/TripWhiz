@@ -426,8 +426,8 @@ export default function SupportChatbot() {
                 {/* Input */}
                 <div className="p-4 border-t border-gray-200">
                   {!knowledgeReady && (
-                    <div className="mb-3 p-2 bg-slate-50 border border-slate-200 rounded-lg">
-                      <div className="flex items-center space-x-2 text-slate-800">
+                    <div className="mb-3 p-2 bg-yellow-50 border border-yellow-200 rounded-lg">
+                      <div className="flex items-center space-x-2 text-yellow-800">
                         <AlertCircle className="w-4 h-4" />
                         <span className="text-xs">Loading knowledge base...</span>
                       </div>
